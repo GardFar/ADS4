@@ -26,6 +26,7 @@ import java.util.LinkedList;
 
 import vue.AvancerInstruction;
 import vue.BaisserPinceauInstruction;
+import vue.BlocInstruction;
 import vue.Canvas;
 import vue.DefinitionInstruction;
 import vue.Div;
@@ -120,6 +121,7 @@ public class Parser {
 		case DEBUT:
 			term(Sym.DEBUT);
 			LinkedList<Instruction> l = nontermBlocInstruction();
+			i=new BlocInstruction(l);
 			term(Sym.FIN);
 			break;
 		default:

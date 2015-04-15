@@ -21,12 +21,13 @@ package vue;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BlocInstruction extends Instruction {
 
-	private ArrayList<Instruction> bloc;
+	private List<Instruction> bloc;
 	
-	public BlocInstruction(ArrayList<Instruction> l){
+	public BlocInstruction(List<Instruction> l){
 		bloc=l;
 	}
 	

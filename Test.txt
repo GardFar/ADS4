@@ -1,7 +1,7 @@
 Var angle;
 Debut
 
-angle=0-90;
+angle=90;
 BasPinceau;
 Avance 10;
 Tourne angle;
