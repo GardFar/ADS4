@@ -20,6 +20,7 @@
 package vue;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 
 import javax.swing.JFrame;
@@ -30,10 +31,17 @@ public class Fenetre extends JFrame{
 	 */
 	private static final long serialVersionUID = 1168286374302260479L;
 	private Canvas canvas;
+	private EntreeTexte entree;
+	
 	
 	public Fenetre(){
 		super();
 		setTitle("Tortue");
+		setLayout(new FlowLayout());
+		
+		entree=new EntreeTexte();
+		add(entree);
+		
 		canvas=new Canvas();
 		add(canvas);
 		setResizable(false);
