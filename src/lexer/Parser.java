@@ -73,8 +73,8 @@ public class Parser {
 	}
 
 	public void nonTermProgramme() throws Exception {
-		nontermDeclarations();
-		nontermInstruction();
+		instructions.addAll(nontermDeclarations());
+		instructions.add(nontermInstruction());
 	}
 
 	public LinkedList<Instruction> nontermDeclarations() throws Exception {
