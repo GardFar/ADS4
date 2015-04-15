@@ -8,22 +8,26 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import compilateur.Compilateur;
 import lexer.Lexer;
 import lexer.LexerException;
 import lexer.Token;
 
 public class EntreeTexte extends JPanel{
 	
+	Fenetre pere; 
 	JTextArea area;
 	JButton compiler;
 	JButton executer;
-	public EntreeTexte(){
+	public EntreeTexte(Fenetre p){
+		this.pere=p;
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(new Dimension(400, 600));
 		initComponents();
@@ -43,25 +47,21 @@ public class EntreeTexte extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Reader reader=new StringReader(area.getText());
-				Lexer lexer = new Lexer(reader);
-				Token t;
-
-				do{
-					try{
-						t=lexer.yylex();
-					}
-					catch(LexerException e){
-						e.printStackTrace();
-						return;
-					} catch (IOException e) {
-						e.printStackTrace();
-						return;
-					} catch (Exception e) {
-						e.printStackTrace();
-						return;
-					}
-				    if(t!=null){System.out.println(t);}
-				}while(t != null && !t.toString().equals("EOF"));
+				try {
+					System.out.println(Compilateur.lexer(reader));
+					reader=new StringReader(area.getText());
+					List<Instruction> l= Compilateur.compiler(reader);
+					
+					//Ameliorer parser pour que cela fonctionne : 
+					pere.getCanvas().setInstructions(l);
+					pere.getCanvas().repaint();
+					/*System.out.println(l.size());
+					for(Instruction i : l){
+						System.out.println(i);
+					}*/
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 			
 		});

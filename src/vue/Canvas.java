@@ -23,6 +23,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -36,7 +37,7 @@ public class Canvas extends JPanel{
 	
 	private Tortue tortue;
 	
-	private ArrayList<Instruction> instructions=new ArrayList<Instruction>();
+	private List<Instruction> instructions=new ArrayList<Instruction>();
 	
 	private ValueEnvironment env=new ValueEnvironment(); //A bouger plus tard, la ou les appelles de exec seront fait
 	
@@ -54,6 +55,9 @@ public class Canvas extends JPanel{
 		instructions.add(new TournerInstruction(-90));
 		instructions.add(new AvancerInstruction(200));
 		
+	}
+	public void setInstructions(List<Instruction> l){
+		this.instructions=l;
 	}
 	
 	@Override

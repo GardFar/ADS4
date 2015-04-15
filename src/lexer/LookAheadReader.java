@@ -51,7 +51,7 @@ public class LookAheadReader {
 	}
 	
 	public String getName() throws Exception{
-		if(cur instanceof IntToken){
+		if(cur.getSymbol()==Sym.NAME){
 			IdToken t=(IdToken) cur;
 			return t.getName();
 		}

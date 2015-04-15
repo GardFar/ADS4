@@ -5,5 +5,5 @@ angle=0-90;
 BasPinceau;
 Avance 10;
 Tourne angle;
-Avance10;
+Avance 10;
 Fin

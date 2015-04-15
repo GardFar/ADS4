@@ -39,11 +39,12 @@ public class Fenetre extends JFrame{
 		setTitle("Tortue");
 		setLayout(new FlowLayout());
 		
-		entree=new EntreeTexte();
+		entree=new EntreeTexte(this);
 		add(entree);
 		
 		canvas=new Canvas();
 		add(canvas);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
 		pack();
 		setVisible(true);
@@ -52,5 +53,9 @@ public class Fenetre extends JFrame{
 	public static void main(String[] args){
 		new Fenetre();
 		
+	}
+
+	public Canvas getCanvas() {
+		return canvas;
 	}
 }

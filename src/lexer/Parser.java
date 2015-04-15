@@ -19,7 +19,7 @@
 
 package lexer;
 
-import java.awt.List;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -188,5 +188,9 @@ public class Parser {
 		default:
 			throw new Exception("Erreur : Operateur non reconnu");
 		}
+	}
+
+	public List<Instruction> getInstructions() {
+		return instructions;
 	}
 }
