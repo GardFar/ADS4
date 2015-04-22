@@ -55,10 +55,10 @@ public class EntreeTexte extends JPanel{
 					//Ameliorer parser pour que cela fonctionne : 
 					pere.getCanvas().setInstructions(l);
 					pere.getCanvas().repaint();
-					System.out.println(l.size());
+					/*System.out.println(l.size());
 					for(Instruction i : l){
 						System.out.println(i);
-					}
+					}*/
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

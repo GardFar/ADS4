@@ -20,20 +20,26 @@
 package vue;
 
 import java.awt.Graphics;
-import java.util.List;
 
-public class BlocInstruction extends Instruction {
+public class SiInstruction extends Instruction {
 
-	private List<Instruction> bloc;
+	private Expression expr;
+	private Instruction instSI;
+	private Instruction instSINON;
 	
-	public BlocInstruction(List<Instruction> l){
-		bloc=l;
+	public SiInstruction(Expression e,Instruction i1,Instruction i2){
+		this.expr=e;
+		this.instSI=i1;
+		this.instSINON=i2;
 	}
 	
 	@Override
 	public void exec(Canvas canvas, Graphics g) throws Exception {
-		for(Instruction i:bloc){
-			i.exec(canvas, g);
+		if(expr.eval(canvas.getEnv())!=0){
+			instSI.exec(canvas,g);		
+		}
+		else if(instSINON!=null){
+			instSINON.exec(canvas, g);
 		}
 		
 	}

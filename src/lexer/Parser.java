@@ -37,6 +37,8 @@ import vue.Int;
 import vue.Minus;
 import vue.Mult;
 import vue.Plus;
+import vue.SiInstruction;
+import vue.TantQueInstruction;
 import vue.TournerInstruction;
 import vue.Var;
 
@@ -51,17 +53,12 @@ public class Parser {
 	 * Grammaire : nonTermProgramme->nonTermDeclarations nonTermInstruction
 	 * 
 	 * nonTermDeclarations->VAR nonTermIdentificateur; nonTermDeclaration | rien
-	 * ===== nonTermIdentificateur ? nonTermInstruction->Avance
-	 * nonTermExpression | Tourne nonTermExpression | BasPinceau | HautPinceau |
-	 * identificateur = nonTermExpression | Debut nonTermBlocInstruction Fin
-	 * 
-	 * nonTermBlocInstruction -> nonTermInstruction ; nonTermBlocInstruction |
-	 * rien
-	 * 
+	 * nonTermInstruction->Avance nonTermExpression | Tourne nonTermExpression | BasPinceau | HautPinceau |identificateur = nonTermExpression | Debut nonTermBlocInstruction Fin | Si nonTermExpression Alors nonTermInstruction nonTermSinon | Tant que nonTermExpression Faire nonTermInstruction
+	 * nonTermBlocInstruction -> nonTermInstruction ; nonTermBlocInstruction | rien
 	 * nonTermExpression-> nombre nonTermExpressionSuite | identificateur nonTermExpressionSuite | (nonTermExpression) nonTermExpressionSuite
 	 * nonTermExpressionSuite->nonTermOperateur nonTermExpressionSuite | rien
-	 * nonTermOperateur->+ nonTermExpression | - nonTermExpression |*
-	 * nonTermExpression |/ nonTermExpression
+	 * nonTermOperateur->+ nonTermExpression | - nonTermExpression |* nonTermExpression |/ nonTermExpression
+	 * nonTermSinon->Sinon nonTermInstruction | rien
 	 */
 
 	public Parser(LookAheadReader r) {
@@ -94,35 +91,52 @@ public class Parser {
 	public Instruction nontermInstruction() throws Exception {
 		Instruction i = null;
 		Sym s = reader.getSymbol();
-		switch (s) { // J'avais pas envie d'ecrire 6 if(reader.check...
+		switch (s) {
 		case AVANCE:
 			term(Sym.AVANCE);
 			i=new AvancerInstruction(nontermExpression());
+			term(Sym.SEMI);
 			break;
 		case TOURNE:
 			term(Sym.TOURNE);
 			i=new TournerInstruction(nontermExpression());
+			term(Sym.SEMI);
 			break;
 		case BASPINCEAU:
 			term(Sym.BASPINCEAU);
 			i=new BaisserPinceauInstruction();
+			term(Sym.SEMI);
 			break;
 		case HAUTPINCEAU:
 			term(Sym.HAUTPINCEAU);
 			i=new HausserPinceauInstruction();
+			term(Sym.SEMI);
 			break;
 		case NAME:
 			String st = reader.getName();
 			term(Sym.NAME);
 			term(Sym.EQ);
-			Expression e = nontermExpression();
-			i = new DefinitionInstruction(st,e);
+			i = new DefinitionInstruction(st,nontermExpression());
+			term(Sym.SEMI);
 			break;
 		case DEBUT:
 			term(Sym.DEBUT);
-			LinkedList<Instruction> l = nontermBlocInstruction();
-			i=new BlocInstruction(l);
+			i = new BlocInstruction(nontermBlocInstruction());
 			term(Sym.FIN);
+			break;
+		case SI:
+			term(Sym.SI);
+			Expression eSi = nontermExpression();
+			term(Sym.ALORS);
+			Instruction i1 = nontermInstruction();
+			Instruction i2 = nontermSinon();
+			i=new SiInstruction(eSi,i1,i2);
+			break;
+		case TANTQUE:
+			term(Sym.TANTQUE);
+			Expression eTq = nontermExpression();
+			term(Sym.FAIRE);
+			i= new TantQueInstruction(eTq,nontermInstruction());
 			break;
 		default:
 			throw new Exception("Erreur : Instruction non reconnue");
@@ -130,10 +144,17 @@ public class Parser {
 		return i;
 	}
 	
+	private Instruction nontermSinon() throws Exception{
+		if(reader.check(Sym.SINON)){
+			term(Sym.SINON);
+			return nontermInstruction();
+		}
+		return null;
+	}
+
 	public LinkedList<Instruction> nontermBlocInstruction() throws Exception{
 		if(reader.isInstruction()){
 			Instruction i = nontermInstruction();
-			term(Sym.SEMI);
 			LinkedList<Instruction> l = nontermBlocInstruction();
 			l.addFirst(i);
 			return l;

@@ -20,20 +20,21 @@
 package vue;
 
 import java.awt.Graphics;
-import java.util.List;
 
-public class BlocInstruction extends Instruction {
+public class TantQueInstruction extends Instruction {
 
-	private List<Instruction> bloc;
+	private Expression expr;
+	private Instruction inst;
 	
-	public BlocInstruction(List<Instruction> l){
-		bloc=l;
+	public TantQueInstruction(Expression e,Instruction i){
+		this.expr=e;
+		this.inst=i;
 	}
 	
 	@Override
 	public void exec(Canvas canvas, Graphics g) throws Exception {
-		for(Instruction i:bloc){
-			i.exec(canvas, g);
+		while(expr.eval(canvas.getEnv())!=0){
+			inst.exec(canvas, g);
 		}
 		
 	}

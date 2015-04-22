@@ -25,7 +25,7 @@ public class Tortue {
 	
 	private int angle;
 	
-	public boolean haut=false;
+	public boolean haut=true;
 	
 	public Tortue(){
 		x=0;

@@ -37,6 +37,7 @@ public class LookAheadReader {
 		if(!check(s)){
 			throw new Exception("Impossible de manger "+s+", l'actuel est "+cur);
 		}
+		System.out.println(s);
 		cur=lexer.yylex();
 	}
 	
@@ -68,18 +69,18 @@ public class LookAheadReader {
 		return cur.getSymbol();
 	}
 	
-	public boolean isInstruction(){
-		return is(Sym.TOURNE,Sym.AVANCE,Sym.BASPINCEAU,Sym.HAUTPINCEAU,Sym.DEBUT,Sym.NAME);
+	public boolean isInstruction() throws Exception{
+		return is(Sym.TOURNE,Sym.AVANCE,Sym.BASPINCEAU,Sym.HAUTPINCEAU,Sym.DEBUT,Sym.NAME,Sym.SI,Sym.TANTQUE);
 	}
 	
-	public boolean isOperateur(){
+	public boolean isOperateur() throws Exception{
 		return is(Sym.PLUS,Sym.DIV,Sym.MINUS,Sym.TIMES);
 	}
 	
-	public boolean is(Sym...syms){
-		Sym scur=cur.getSymbol();
+	public boolean is(Sym...syms) throws Exception{
 		for(Sym s:syms){
-			if(scur==s){
+			if(check(s)){
+
 				return true;
 			}
 		}

@@ -1,9 +1,20 @@
-Var angle;
+Var a;
+Var b;
+Var c;
 Debut
-
-angle=90;
+HautPinceau;
+a=0-90;
+b=100;
+c=4;
+Avance 200;
+Tourne 0-90;
+Avance 200;
+Tourne 90;
 BasPinceau;
-Avance 10;
-Tourne angle;
-Avance 10;
+Tant que c Faire
+Debut
+Avance b;
+Tourne a;
+c=c-1;
+Fin
 Fin

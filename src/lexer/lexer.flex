@@ -40,6 +40,11 @@ variable = [a-z][a-zA-Z0-9]*
    "BasPinceau"	{return new Token(Sym.BASPINCEAU);}
    "Debut"	{return new Token(Sym.DEBUT);}
    "Fin"	{return new Token(Sym.FIN);}
+   "Si"    {return new Token(Sym.SI);}
+   "Alors" {return new Token(Sym.ALORS);}
+   "Sinon" {return new Token(Sym.SINON);}
+   "Tant que" {return new Token(Sym.TANTQUE);}
+   "Faire" {return new Token(Sym.FAIRE);}
    
    {variable}	{return new IdToken(Sym.NAME, yytext());}
    [=]		{return new Token(Sym.EQ);}
