@@ -3,6 +3,7 @@ Var b;
 Var c;
 Debut
 ChangeCouleur bleu;
+ChangeEpaisseur 10;
 HautPinceau;
 a=0-90;
 b=100;
