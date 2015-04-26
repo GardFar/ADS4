@@ -41,7 +41,6 @@ public class Canvas extends JPanel{
 	
 	private Tortue tortue;
 	
-	//private List<Instruction> instructions=new ArrayList<Instruction>();
 	private Programme programme;
 	
 	private ValueEnvironment env=new ValueEnvironment(); //A bouger plus tard, la ou les appelles de exec seront fait
@@ -50,6 +49,7 @@ public class Canvas extends JPanel{
 	public Canvas(Fenetre p , int dimX, int dimY){
 		this.dimX=dimX;
 		this.dimY=dimY;
+		this.pere=p;
 		setPreferredSize(new Dimension(dimX, dimY));
 		tortue=new Tortue();
 	}
@@ -60,6 +60,9 @@ public class Canvas extends JPanel{
 	@Override
 	public void paintComponent(Graphics g){
 		tortue.reIni();
+		if(pere.getErreurs()!=null){
+			pere.getErreurs().effacerContenu();
+		}
 		g.setColor(Color.GREEN);
 		g.fillRect(0, 0, dimX, dimY);
 		
@@ -69,8 +72,7 @@ public class Canvas extends JPanel{
 				programme.executer(this, g);
 			}
 			catch(Exception e){
-				//Ne marche pas, je vais voir si je peux faire un affichage plus poussé des exceptions directement sur un panneau de la fenetre. 
-				JOptionPane.showMessageDialog(this,"Erreur d'execution : ");
+				pere.getErreurs().ecrireException(e.getMessage());
 			}
 		}
 		

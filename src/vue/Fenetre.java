@@ -33,6 +33,7 @@ public class Fenetre extends JFrame{
 	private Canvas canvas;
 	private EntreeTexte entree;
 	
+	private AffichageErreurs erreurs;
 	
 	public Fenetre(){
 		super();
@@ -40,10 +41,14 @@ public class Fenetre extends JFrame{
 		setLayout(new FlowLayout());
 		
 		entree=new EntreeTexte(this);
-		add(entree);
-		
+		erreurs=new AffichageErreurs(this);
 		canvas=new Canvas(this);
+		
+		add(entree);
 		add(canvas);
+		erreurs=new AffichageErreurs(this);
+		add(erreurs);
+		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);
 		pack();
@@ -57,5 +62,9 @@ public class Fenetre extends JFrame{
 
 	public Canvas getCanvas() {
 		return canvas;
+	}
+	
+	public AffichageErreurs getErreurs(){
+		return erreurs;
 	}
 }

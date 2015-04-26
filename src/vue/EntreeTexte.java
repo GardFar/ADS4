@@ -23,10 +23,11 @@ import lexer.Token;
 
 public class EntreeTexte extends JPanel{
 	
-	Fenetre pere; 
-	JTextArea area;
-	JButton compiler;
-	JButton executer;
+	private Fenetre pere; 
+	private JTextArea area;
+	private JButton compiler;
+	private JButton executer;
+	
 	public EntreeTexte(Fenetre p){
 		this.pere=p;
 		this.setLayout(new BorderLayout());
@@ -49,13 +50,15 @@ public class EntreeTexte extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				Reader reader=new StringReader(area.getText());
 				try {
-					System.out.println(Compilateur.lexer(reader));
+					//System.out.println(Compilateur.lexer(reader));
+					pere.getErreurs().effacerContenu();
 					reader=new StringReader(area.getText());
 					List<Instruction> l= Compilateur.compiler(reader);
 					
 					pere.getCanvas().setInstructions(l);
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(pere,"Erreur dans la compilation : "+e.toString());
+					//JOptionPane.showMessageDialog(pere,"Erreur dans la compilation : "+e.toString());
+					pere.getErreurs().ecrireException(e.getMessage());
 					//e.printStackTrace();
 				}
 			}
