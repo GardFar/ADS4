@@ -29,6 +29,7 @@ import vue.BaisserPinceauInstruction;
 import vue.BlocInstruction;
 import vue.Canvas;
 import vue.ChangeCouleurInstruction;
+import vue.ChangeEpaisseurInstruction;
 import vue.DefinitionInstruction;
 import vue.Div;
 import vue.Expression;
@@ -100,6 +101,11 @@ public class Parser {
 			String name = reader.getName();
 			term(Sym.NAME);
 			i=new ChangeCouleurInstruction(name);
+			term(Sym.SEMI);
+			break;
+		case CHANGEEPAISSEUR:
+			term(Sym.CHANGEEPAISSEUR);
+			i=new ChangeEpaisseurInstruction(nontermExpression());
 			term(Sym.SEMI);
 			break;
 		case AVANCE:

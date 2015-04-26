@@ -2,6 +2,7 @@ Var a;
 Var b;
 Var c;
 Debut
+ChangeCouleur bleu;
 HautPinceau;
 a=0-90;
 b=100;

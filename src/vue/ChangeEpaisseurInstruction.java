@@ -17,10 +17,33 @@
  */
 
 
-package lexer;
+package vue;
 
-public enum Sym {
-	NOMBRE, LPAR, RPAR, DIV,TIMES, PLUS, MINUS, VAR, AVANCE,
-	TOURNE, HAUTPINCEAU, BASPINCEAU, DEBUT, FIN, NAME, EQ, SEMI, EOF,
-	SI,ALORS,SINON,TANTQUE,FAIRE,CHANGECOULEUR, CHANGEEPAISSEUR;
+import java.awt.BasicStroke;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Stroke;
+
+public class ChangeEpaisseurInstruction extends Instruction{
+
+	Expression epaisseur;
+	
+	public ChangeEpaisseurInstruction(Expression d){
+		epaisseur=d;
+	}
+	
+	public ChangeEpaisseurInstruction(int d){
+		epaisseur = new Int(d);
+	}
+	
+	public String toString(){
+		return "Changer l'epaisseur du pinceau de "+epaisseur;
+	}
+	
+	@Override
+	public void exec(Canvas canvas, Graphics g) throws Exception {
+		Graphics2D g2D=(Graphics2D)g;
+		g2D.setStroke(new BasicStroke((float) epaisseur.eval(canvas.getEnv())));
+	}
+
 }
