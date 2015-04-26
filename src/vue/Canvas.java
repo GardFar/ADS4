@@ -25,7 +25,10 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import compilateur.Programme;
 
 public class Canvas extends JPanel{
 	/**
@@ -34,30 +37,24 @@ public class Canvas extends JPanel{
 	private static final long serialVersionUID = 929488845259380376L;
 	private int dimX;
 	private int dimY;
+	private Fenetre pere;
 	
 	private Tortue tortue;
 	
-	private List<Instruction> instructions=new ArrayList<Instruction>();
+	//private List<Instruction> instructions=new ArrayList<Instruction>();
+	private Programme programme;
 	
 	private ValueEnvironment env=new ValueEnvironment(); //A bouger plus tard, la ou les appelles de exec seront fait
 	
 	
-	public Canvas(int dimX, int dimY){
+	public Canvas(Fenetre p , int dimX, int dimY){
 		this.dimX=dimX;
 		this.dimY=dimY;
 		setPreferredSize(new Dimension(dimX, dimY));
 		tortue=new Tortue();
-		instructions.add(new AvancerInstruction(20));
-		instructions.add(new TournerInstruction(-45));
-		instructions.add(new AvancerInstruction(200));
-		instructions.add(new TournerInstruction(45));
-		instructions.add(new AvancerInstruction(200));
-		instructions.add(new TournerInstruction(-90));
-		instructions.add(new AvancerInstruction(200));
-		
 	}
 	public void setInstructions(List<Instruction> l){
-		this.instructions=l;
+		this.programme=new Programme(l);
 	}
 	
 	@Override
@@ -67,17 +64,20 @@ public class Canvas extends JPanel{
 		g.fillRect(0, 0, dimX, dimY);
 		
 		g.setColor(Color.RED);
-		for (Instruction i : instructions){
-			try {
-				i.exec(this, g);
-			} catch (Exception e) {
-				//le exec devrait etre dans un main/programme en dehors du Canvas plus tard je suppose ? on pourra gerer les exceptions la bas
+		if(programme!=null){
+			try{
+				programme.executer(this, g);
+			}
+			catch(Exception e){
+				//Ne marche pas, je vais voir si je peux faire un affichage plus poussé des exceptions directement sur un panneau de la fenetre. 
+				JOptionPane.showMessageDialog(this,"Erreur d'execution : ");
 			}
 		}
+		
 	}
 	
-	public Canvas(){
-		this(500, 500);
+	public Canvas(Fenetre p){
+		this(p,500, 500);
 	}
 	
 	public Tortue getTortue(){
@@ -86,6 +86,10 @@ public class Canvas extends JPanel{
 	
 	public int getDimY(){
 		return this.dimY;
+	}
+	
+	public int getDimX(){
+		return this.dimX;
 	}
 	
 	public ValueEnvironment getEnv(){

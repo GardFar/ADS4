@@ -42,7 +42,7 @@ public class Fenetre extends JFrame{
 		entree=new EntreeTexte(this);
 		add(entree);
 		
-		canvas=new Canvas();
+		canvas=new Canvas(this);
 		add(canvas);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);

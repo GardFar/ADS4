@@ -11,6 +11,7 @@ import java.io.StringReader;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -52,16 +53,20 @@ public class EntreeTexte extends JPanel{
 					reader=new StringReader(area.getText());
 					List<Instruction> l= Compilateur.compiler(reader);
 					
-					//Ameliorer parser pour que cela fonctionne : 
 					pere.getCanvas().setInstructions(l);
-					pere.getCanvas().repaint();
-					/*System.out.println(l.size());
-					for(Instruction i : l){
-						System.out.println(i);
-					}*/
 				} catch (Exception e) {
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(pere,"Erreur dans la compilation : "+e.toString());
+					//e.printStackTrace();
 				}
+			}
+			
+		});
+		
+		executer.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				pere.getCanvas().repaint();
 			}
 			
 		});

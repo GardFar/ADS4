@@ -39,6 +39,9 @@ public class AvancerInstruction extends Instruction{
 		int x0=t.getX();
 		int y0=canvas.getDimY()-t.getY();
 		t.avancer(distance.eval(canvas.getEnv()));
+		if(t.getX()<0 || t.getY()<0 || t.getX()>canvas.getDimX() || t.getY()>canvas.getDimY()){
+			throw new Exception("Tortue sortie du cadre");
+		}
 		if(!t.isHaut())
 			g.drawLine(x0, y0, t.getX(), canvas.getDimY()-t.getY());
 	}
