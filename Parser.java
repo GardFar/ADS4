@@ -28,7 +28,6 @@ import vue.AvancerInstruction;
 import vue.BaisserPinceauInstruction;
 import vue.BlocInstruction;
 import vue.Canvas;
-import vue.ChangeCouleurInstruction;
 import vue.DefinitionInstruction;
 import vue.Div;
 import vue.Expression;
@@ -54,8 +53,7 @@ public class Parser {
 	 * Grammaire : nonTermProgramme->nonTermDeclarations nonTermInstruction
 	 * 
 	 * nonTermDeclarations->VAR nonTermIdentificateur; nonTermDeclaration | rien
-	 * nonTermInstruction->Avance nonTermExpression | Tourne nonTermExpression | BasPinceau | HautPinceau |identificateur = nonTermExpression | ChangeCouleur nonTermIdentificateur
-	 *  | Debut nonTermBlocInstruction Fin | Si nonTermExpression Alors nonTermInstruction nonTermSinon | Tant que nonTermExpression Faire nonTermInstruction
+	 * nonTermInstruction->Avance nonTermExpression | Tourne nonTermExpression | BasPinceau | HautPinceau |identificateur = nonTermExpression | Debut nonTermBlocInstruction Fin | Si nonTermExpression Alors nonTermInstruction nonTermSinon | Tant que nonTermExpression Faire nonTermInstruction
 	 * nonTermBlocInstruction -> nonTermInstruction ; nonTermBlocInstruction | rien
 	 * nonTermExpression-> nombre nonTermExpressionSuite | identificateur nonTermExpressionSuite | (nonTermExpression) nonTermExpressionSuite
 	 * nonTermExpressionSuite->nonTermOperateur nonTermExpressionSuite | rien
@@ -83,7 +81,6 @@ public class Parser {
 			String st = reader.getName();
 			term(Sym.NAME);
 			term(Sym.SEMI);
-			
 			LinkedList<Instruction> l = nontermDeclarations();
 			l.addFirst(new DefinitionInstruction(st,null));
 			return l;
@@ -95,13 +92,6 @@ public class Parser {
 		Instruction i = null;
 		Sym s = reader.getSymbol();
 		switch (s) {
-		case CHANGECOULEUR:
-			term(Sym.CHANGECOULEUR);
-			String name = reader.getName();
-			term(Sym.NAME);
-			i=new ChangeCouleurInstruction(name);
-			term(Sym.SEMI);
-			break;
 		case AVANCE:
 			term(Sym.AVANCE);
 			i=new AvancerInstruction(nontermExpression());

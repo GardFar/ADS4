@@ -38,6 +38,8 @@ variable = [a-z][a-zA-Z0-9]*
    "Tourne"	{return new Token(Sym.TOURNE);}
    "HautPinceau" {return new Token(Sym.HAUTPINCEAU);}
    "BasPinceau"	{return new Token(Sym.BASPINCEAU);}
+   "ChangeCouleur"	{return new Token(Sym.CHANGECOULEUR);}
+   
    "Debut"	{return new Token(Sym.DEBUT);}
    "Fin"	{return new Token(Sym.FIN);}
    "Si"    {return new Token(Sym.SI);}

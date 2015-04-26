@@ -33,7 +33,13 @@ public class DefinitionInstruction extends Instruction {
 	
 	@Override
 	public void exec(Canvas canvas, Graphics g) throws Exception{
-		canvas.getEnv().setVar(name, value.eval(canvas.getEnv()));
+		if(value!=null){
+			canvas.getEnv().setVar(name, value.eval(canvas.getEnv()));
+		}
+		else{
+			//J'ai ajoute cela dans le cas ou on ne fait que declarer une variable
+			canvas.getEnv().setVar(name, 0);
+		}
 		
 	}
 

@@ -33,6 +33,7 @@ public class BlocInstruction extends Instruction {
 	@Override
 	public void exec(Canvas canvas, Graphics g) throws Exception {
 		for(Instruction i:bloc){
+			System.out.println("Bloc : "+i.toString());
 			i.exec(canvas, g);
 		}
 		

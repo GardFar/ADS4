@@ -19,35 +19,39 @@
 
 package vue;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.util.HashMap;
 
-public class AvancerInstruction extends Instruction{
+public class ChangeCouleurInstruction extends Instruction{
 
-	Expression distance;
+	private static HashMap<String, Color> map=map();
+	private String couleur;
 	
-	public AvancerInstruction(Expression d){
-		distance=d;
+	
+	private static HashMap<String, Color> map(){
+		HashMap<String, Color> map=new HashMap<String, Color>();
+		map.put("rouge", Color.red);
+		map.put("bleu", Color.blue);
+		map.put("vert", Color.green);
+		map.put("gris", Color.gray);
+		return map;
 	}
-	
-	public AvancerInstruction(int d){
-		distance = new Int(d);
+	public ChangeCouleurInstruction(String c){
+		super();
+		couleur=c;
 	}
 	
 	public String toString(){
-		return "Avancer de "+distance;
+		return "Changer couleur "+couleur;
 	}
 	
 	@Override
-	public void exec(Canvas canvas, Graphics g) throws Exception {
-		Tortue t=canvas.getTortue();
-		int x0=t.getX();
-		int y0=canvas.getDimY()-t.getY();
-		t.avancer(distance.eval(canvas.getEnv()));
-		if(t.getX()<0 || t.getY()<0 || t.getX()>canvas.getDimX() || t.getY()>canvas.getDimY()){
-			throw new Exception("Tortue sortie du cadre");
+	public void exec(Canvas canvas, Graphics g) {
+		//CHANGER LA COULEUR DU PINCEAU
+		if(map.containsKey(couleur)){
+			g.setColor(map.get(couleur));
 		}
-		if(!t.isHaut())
-			g.drawLine(x0, y0, t.getX(), canvas.getDimY()-t.getY());
 	}
 
 }
