@@ -3,6 +3,7 @@ package vue;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -10,7 +11,9 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -50,15 +53,17 @@ public class EntreeTexte extends JPanel{
 		this.add(scroll, BorderLayout.PAGE_START);
 		pane.setPreferredSize(new Dimension(400, 500));
 		
-		ImageIcon compilationIcon=new ImageIcon("Images/compiler.png");
-		ImageIcon executerIcon=new ImageIcon("Images/executer.png");
-		
 		compiler=new JButton("Compiler");
-		compiler.setIcon(compilationIcon);
-		add(compiler, BorderLayout.LINE_END);
-		
 		executer=new JButton("Executer");
-		executer.setIcon(executerIcon);
+		try {
+			Image compilationImage=ImageIO.read(getClass().getClassLoader().getResource("Images/compiler.png"));
+			Image executerImage=ImageIO.read(getClass().getClassLoader().getResource("Images/executer.png"));
+			compiler.setIcon(new ImageIcon(compilationImage));
+			executer.setIcon(new ImageIcon(executerImage));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		add(compiler, BorderLayout.LINE_END);
 		add(executer, BorderLayout.CENTER);
 		
 		compiler.addActionListener(new ActionListener(){

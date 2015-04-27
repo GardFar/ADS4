@@ -23,7 +23,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
@@ -51,8 +54,13 @@ public class Fenetre extends JFrame{
 	
 	public void initComponents(){
 		setLayout(new BorderLayout());
-		ImageIcon icone=new ImageIcon("Images/koopa.png");
-		setIconImage(icone.getImage());
+		Image icone=null;
+		try {
+			icone = ImageIO.read(getClass().getClassLoader().getResource("Images/koopa.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		setIconImage(icone);
 		
 		entree=new EntreeTexte(this);
 		erreurs=new AffichageErreurs(this);

@@ -22,10 +22,14 @@ package vue;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -42,6 +46,7 @@ public class Canvas extends JPanel{
 	private Fenetre pere;
 	private Tortue tortue;
 	
+	BufferedImage spriteTurtle;
 	private Programme programme;
 	
 	private ValueEnvironment env=new ValueEnvironment(); //A bouger plus tard, la ou les appelles de exec seront fait
@@ -54,27 +59,16 @@ public class Canvas extends JPanel{
 		setPreferredSize(new Dimension(dimX, dimY));
 		this.setBorder(BorderFactory.createRaisedBevelBorder());
 		tortue=new Tortue();
+		try {
+			spriteTurtle=ImageIO.read(getClass().getClassLoader().getResource("Images/koopa.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	public void setInstructions(List<Instruction> l){
 		this.programme=new Programme(l);
 	}
 	
-	/*private static HashMap<String, Color> map=map();
-	
-	private static HashMap<String, Color> map(){
-		HashMap<String, Color> map=new HashMap<String, Color>();
-		map.put("rouge", Color.red);
-		map.put("bleu", Color.blue);
-		map.put("vert", Color.green);
-		map.put("gris", Color.gray);
-		map.put("rose", Color.PINK);
-		//En ajouter d'autres...
-		return map;
-	}
-	
-	public static HashMap<String, Color> getMap(){
-		return map;
-	}*/
 	
 	@Override
 	public void paintComponent(Graphics g){
@@ -94,6 +88,8 @@ public class Canvas extends JPanel{
 				pere.getErreurs().ecrireException(e.getMessage());
 			}
 		}
+		
+		g.drawImage(spriteTurtle, tortue.getX()-10, this.getDimY()-tortue.getY()-10, 20, 20, null, null);
 		
 	}
 	
