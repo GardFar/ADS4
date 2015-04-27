@@ -23,6 +23,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class Fenetre extends JFrame{
@@ -39,6 +40,8 @@ public class Fenetre extends JFrame{
 		super();
 		setTitle("Tortue");
 		setLayout(new FlowLayout());
+		ImageIcon icone=new ImageIcon("Images/koopa.png");
+		setIconImage(icone.getImage());
 		
 		entree=new EntreeTexte(this);
 		erreurs=new AffichageErreurs(this);

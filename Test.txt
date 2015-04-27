@@ -1,3 +1,6 @@
+/////////////////////
+//Dessiner un carré bleu
+
 Var a;
 Var b;
 Var c;
@@ -19,4 +22,31 @@ Avance b;
 Tourne a;
 c=c-1;
 Fin
+Fin
+
+//////////////
+//Dessiner un cercle bleu
+
+Var a;
+Var b;
+Var c;
+Debut
+ChangeCouleur bleu;
+ChangeEpaisseur 5;
+HautPinceau;
+Avance 100;
+Tourne 0-90;
+Avance 200;
+Tourne 90;
+BasPinceau;
+a=100;
+b=5;
+c=5;
+Tant que a Faire
+Debut
+	Avance b;
+	Tourne c;
+	a=a-1;
+Fin 
+
 Fin

@@ -10,6 +10,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -27,7 +28,6 @@ import lexer.Token;
 public class EntreeTexte extends JPanel{
 	
 	private Fenetre pere; 
-	//private JTextArea area;
 	private JTextPane pane;
 	private JScrollPane scroll;
 	private JButton compiler;
@@ -48,9 +48,15 @@ public class EntreeTexte extends JPanel{
 		this.add(scroll, BorderLayout.PAGE_START);
 		pane.setPreferredSize(new Dimension(400, 500));
 		
+		ImageIcon compilationIcon=new ImageIcon("Images/compiler.png");
+		ImageIcon executerIcon=new ImageIcon("Images/executer.png");
+		
 		compiler=new JButton("Compiler");
+		compiler.setIcon(compilationIcon);
 		add(compiler, BorderLayout.LINE_END);
+		
 		executer=new JButton("Executer");
+		executer.setIcon(executerIcon);
 		add(executer, BorderLayout.CENTER);
 		
 		compiler.addActionListener(new ActionListener(){
