@@ -20,7 +20,7 @@ public class Compilateur {
 
 		do{
 			t=lexer.yylex();
-			System.out.println(t.toString());
+			//System.out.println(t.toString());
 		    if(t!=null){
 		    	r+=t+" ";
 		    }

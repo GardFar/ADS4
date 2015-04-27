@@ -19,7 +19,7 @@ public class Programme {
 	
 	public void executer(Canvas c, Graphics g) throws Exception{
 		for (Instruction i : instructions){
-			System.out.println(i.toString());
+			//System.out.println(i.toString());
 			i.exec(c, g);
 		}
 	}

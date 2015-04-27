@@ -13,8 +13,11 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.ScrollPaneConstants;
 
 import compilateur.Compilateur;
 import lexer.Lexer;
@@ -24,7 +27,9 @@ import lexer.Token;
 public class EntreeTexte extends JPanel{
 	
 	private Fenetre pere; 
-	private JTextArea area;
+	//private JTextArea area;
+	private JTextPane pane;
+	private JScrollPane scroll;
 	private JButton compiler;
 	private JButton executer;
 	
@@ -36,9 +41,13 @@ public class EntreeTexte extends JPanel{
 	}
 	
 	public void initComponents(){
-		area=new JTextArea();
-		this.add(area, BorderLayout.PAGE_START);
-		area.setPreferredSize(new Dimension(400, 500));
+		
+		pane=new JTextPane();
+		scroll = new JScrollPane(pane, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		this.add(scroll, BorderLayout.PAGE_START);
+		pane.setPreferredSize(new Dimension(400, 500));
+		
 		compiler=new JButton("Compiler");
 		add(compiler, BorderLayout.LINE_END);
 		executer=new JButton("Executer");
@@ -48,18 +57,15 @@ public class EntreeTexte extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Reader reader=new StringReader(area.getText());
+				Reader reader=new StringReader(pane.getText());
 				try {
-					//System.out.println(Compilateur.lexer(reader));
 					pere.getErreurs().effacerContenu();
-					reader=new StringReader(area.getText());
+					reader=new StringReader(pane.getText());
 					List<Instruction> l= Compilateur.compiler(reader);
 					
 					pere.getCanvas().setInstructions(l);
 				} catch (Exception e) {
-					//JOptionPane.showMessageDialog(pere,"Erreur dans la compilation : "+e.toString());
 					pere.getErreurs().ecrireException(e.getMessage());
-					//e.printStackTrace();
 				}
 			}
 			
