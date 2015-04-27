@@ -15,11 +15,7 @@ public class Couleur extends Expression{
 		bleu=e3;
 	}
 	
-	@Override
-	public int eval(ValueEnvironment env) throws Exception {
-		int r = rouge.eval(env);
-		int v = vert.eval(env);
-		int b = bleu.eval(env);
+	public static int value(int r, int v, int b){
 		String hex = "";
 		if(r<16){
 			hex+="0";
@@ -35,6 +31,14 @@ public class Couleur extends Expression{
 		hex+=Integer.toHexString(b);
 		
 		return (int)Long.parseLong(hex, 16);
+	}
+	
+	@Override
+	public int eval(ValueEnvironment env) throws Exception {
+		int r = rouge.eval(env);
+		int v = vert.eval(env);
+		int b = bleu.eval(env);
+		return value(r, v, b);
 		
 	}
 

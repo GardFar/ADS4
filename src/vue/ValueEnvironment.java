@@ -25,7 +25,28 @@ class ValueEnvironment extends HashMap<String, Integer> {
 	
 	public ValueEnvironment() {
 		super();
+		initCouleurs();
 	}
+	
+	public void initCouleurs(){
+		try {
+			setVar("rouge", Couleur.value(255, 0, 0));
+			setVar("vert", Couleur.value(0, 255, 0));
+			setVar("bleu", Couleur.value(0, 0, 255));
+			setVar("gris", Couleur.value(100, 100, 100));
+			setVar("noir", Couleur.value(0, 0, 0));
+			setVar("blanc", Couleur.value(255, 255, 255));
+			setVar("bleuClair", (int)Long.parseLong("CCE5FF", 16));
+			setVar("saumon", (int)Long.parseLong("FF9999", 16));
+			setVar("rose", (int)Long.parseLong("F024A5", 16));
+			setVar("violet", (int)Long.parseLong("C60EEB", 16));
+			setVar("orange", (int)Long.parseLong("EB5F0E", 16));
+			//Ajouter d'autres couleurs...
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void addVar(String name) throws Exception {
 		this.put(name, null);
 	}
