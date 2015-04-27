@@ -31,6 +31,7 @@ import vue.Canvas;
 import vue.ChangeCouleurInstruction;
 import vue.ChangeEpaisseurInstruction;
 import vue.ChangeFondInstruction;
+import vue.Couleur;
 import vue.DefinitionInstruction;
 import vue.Div;
 import vue.Expression;
@@ -101,16 +102,12 @@ public class Parser {
 		switch (s) {
 		case CHANGECOULEUR:
 			term(Sym.CHANGECOULEUR);
-			name = reader.getName();
-			term(Sym.NAME);
-			i=new ChangeCouleurInstruction(name);
+			i=new ChangeCouleurInstruction(nontermExpression());
 			term(Sym.SEMI);
 			break;
 		case CHANGEFOND:
 			term(Sym.CHANGEFOND);
-			name = reader.getName();
-			term(Sym.NAME);
-			i=new ChangeFondInstruction(name);
+			i=new ChangeFondInstruction(nontermExpression());
 			term(Sym.SEMI);
 			break;
 		case CHANGEEPAISSEUR:
@@ -170,6 +167,7 @@ public class Parser {
 		return i;
 	}
 	
+
 	private Instruction nontermSinon() throws Exception{
 		if(reader.check(Sym.SINON)){
 			term(Sym.SINON);
@@ -213,7 +211,7 @@ public class Parser {
 		}
 		return e;
 	}
-	
+		
 	public Expression nontermOperateur(Expression e) throws Exception{
 		Expression r = null;
 		Sym s = reader.getSymbol();
@@ -234,6 +232,67 @@ public class Parser {
 			term(Sym.DIV);
 			r= new Div(e,nontermExpression());
 			return r;
+		case COMMA:
+			term(Sym.COMMA);
+			Expression e2 = nontermExpression2();
+			term(Sym.COMMA);
+			Expression e3 = nontermExpression2();
+			r = new Couleur(e,e2,e3);
+			return r;	
+			
+		default:
+			throw new Exception("Erreur : Operateur non reconnu");
+		}
+	}
+	
+	public Expression nontermExpression2() throws Exception{
+		if(reader.check(Sym.NOMBRE)){
+			Expression e = new Int(reader.getValue());
+			term(Sym.NOMBRE);
+			return nontermExpressionSuite2(e);
+		}else if(reader.check(Sym.NAME)){
+			Expression e = new Var(reader.getName());
+			term(Sym.NAME);
+			return nontermExpressionSuite2(e);
+		}else if(reader.check(Sym.LPAR)){
+			term(Sym.LPAR);
+			Expression e = nontermExpression2();
+			term(Sym.RPAR);
+			return nontermExpressionSuite2(e);
+		}
+		throw new Exception("Erreur : Expression non reconnue");
+	}
+	
+	public Expression nontermExpressionSuite2(Expression e) throws Exception{
+		if(reader.isOperateur() && !reader.check(Sym.COMMA)){
+			Expression e2 = nontermOperateur2(e);
+			return nontermExpressionSuite2(e2);
+		}
+		return e;
+	}
+		
+	public Expression nontermOperateur2(Expression e) throws Exception{
+		Expression r = null;
+		Sym s = reader.getSymbol();
+		switch(s){
+		case PLUS:
+			term(Sym.PLUS);
+			r= new Plus(e,nontermExpression2());
+			return r;
+		case MINUS:
+			term(Sym.MINUS);
+			r = new Minus(e,nontermExpression2());
+			return r;
+		case TIMES:
+			term(Sym.TIMES);
+			r= new Mult(e,nontermExpression2());
+			return r;
+		case DIV:
+			term(Sym.DIV);
+			r= new Div(e,nontermExpression2());
+			return r;	
+		case COMMA:
+			return e;
 		default:
 			throw new Exception("Erreur : Operateur non reconnu");
 		}

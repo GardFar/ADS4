@@ -59,7 +59,7 @@ public class Canvas extends JPanel{
 		this.programme=new Programme(l);
 	}
 	
-	private static HashMap<String, Color> map=map();
+	/*private static HashMap<String, Color> map=map();
 	
 	private static HashMap<String, Color> map(){
 		HashMap<String, Color> map=new HashMap<String, Color>();
@@ -74,7 +74,7 @@ public class Canvas extends JPanel{
 	
 	public static HashMap<String, Color> getMap(){
 		return map;
-	}
+	}*/
 	
 	@Override
 	public void paintComponent(Graphics g){

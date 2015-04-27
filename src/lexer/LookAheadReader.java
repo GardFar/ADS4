@@ -74,7 +74,7 @@ public class LookAheadReader {
 	}
 	
 	public boolean isOperateur() throws Exception{
-		return is(Sym.PLUS,Sym.DIV,Sym.MINUS,Sym.TIMES);
+		return is(Sym.PLUS,Sym.DIV,Sym.MINUS,Sym.TIMES,Sym.COMMA);
 	}
 	
 	public boolean is(Sym...syms) throws Exception{

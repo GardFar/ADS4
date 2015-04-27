@@ -25,12 +25,12 @@ import java.util.HashMap;
 
 public class ChangeCouleurInstruction extends Instruction{
 
-	private String couleur;
+	private Expression couleur;
 	
 	
-	public ChangeCouleurInstruction(String c){
+	public ChangeCouleurInstruction(Expression e){
 		super();
-		couleur=c;
+		couleur=e;
 	}
 	
 	public String toString(){
@@ -38,11 +38,9 @@ public class ChangeCouleurInstruction extends Instruction{
 	}
 	
 	@Override
-	public void exec(Canvas canvas, Graphics g) {
-		//CHANGER LA COULEUR DU PINCEAU
-		if(canvas.getMap().containsKey(couleur)){
-			g.setColor(canvas.getMap().get(couleur));
-		}
+	public void exec(Canvas canvas, Graphics g) throws Exception{
+		g.setColor(new Color(couleur.eval(canvas.getEnv())));
+		
 	}
 
 }

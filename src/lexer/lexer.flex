@@ -53,6 +53,7 @@ variable = [a-z][a-zA-Z0-9]*
    {variable}	{return new IdToken(Sym.NAME, yytext());}
    [=]		{return new Token(Sym.EQ);}
    [;]		{return new Token(Sym.SEMI);}
+   [,]      {return new Token(Sym.COMMA);}
    {blank}	{}
    <<EOF>>	{return new Token(Sym.EOF);}
    [^]		{throw new LexerException(yyline, yycolumn);}

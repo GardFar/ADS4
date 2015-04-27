@@ -25,25 +25,24 @@ import java.util.HashMap;
 
 public class ChangeFondInstruction extends Instruction{
 
-	private String couleur;
+private Expression couleur;
 	
 	
-	public ChangeFondInstruction(String c){
+	public ChangeFondInstruction(Expression e){
 		super();
-		couleur=c;
+		couleur=e;
 	}
 	
 	public String toString(){
-		return "Changer couleur "+couleur;
+		return "Changer fond "+couleur;
 	}
 	
 	@Override
-	public void exec(Canvas canvas, Graphics g) {
+	public void exec(Canvas canvas, Graphics g) throws Exception{
 		//CHANGER LA COULEUR DU PINCEAU
-		if(canvas.getMap().containsKey(couleur)){
-			canvas.remplirFond(canvas.getMap().get(couleur), g);
+			canvas.remplirFond(new Color(couleur.eval(canvas.getEnv())), g);
 			//g.setColor(canvas.getMap().get(couleur));
-		}
+
 	}
 
 }
