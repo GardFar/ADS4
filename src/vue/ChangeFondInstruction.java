@@ -17,10 +17,33 @@
  */
 
 
-package lexer;
+package vue;
 
-public enum Sym {
-	NOMBRE, LPAR, RPAR, DIV,TIMES, PLUS, MINUS, VAR, AVANCE,
-	TOURNE, HAUTPINCEAU, BASPINCEAU, DEBUT, FIN, NAME, EQ, SEMI, EOF,
-	SI,ALORS,SINON,TANTQUE,FAIRE,CHANGECOULEUR, CHANGEEPAISSEUR, CHANGEFOND;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.util.HashMap;
+
+public class ChangeFondInstruction extends Instruction{
+
+	private String couleur;
+	
+	
+	public ChangeFondInstruction(String c){
+		super();
+		couleur=c;
+	}
+	
+	public String toString(){
+		return "Changer couleur "+couleur;
+	}
+	
+	@Override
+	public void exec(Canvas canvas, Graphics g) {
+		//CHANGER LA COULEUR DU PINCEAU
+		if(canvas.getMap().containsKey(couleur)){
+			canvas.remplirFond(canvas.getMap().get(couleur), g);
+			//g.setColor(canvas.getMap().get(couleur));
+		}
+	}
+
 }

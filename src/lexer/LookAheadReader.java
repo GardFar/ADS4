@@ -70,7 +70,7 @@ public class LookAheadReader {
 	}
 	
 	public boolean isInstruction() throws Exception{
-		return is(Sym.TOURNE,Sym.AVANCE,Sym.BASPINCEAU,Sym.HAUTPINCEAU,Sym.DEBUT,Sym.NAME,Sym.SI,Sym.TANTQUE, Sym.CHANGECOULEUR, Sym.CHANGEEPAISSEUR);
+		return is(Sym.TOURNE,Sym.AVANCE,Sym.BASPINCEAU,Sym.HAUTPINCEAU,Sym.DEBUT,Sym.NAME,Sym.SI,Sym.TANTQUE, Sym.CHANGECOULEUR, Sym.CHANGEEPAISSEUR, Sym.CHANGEFOND);
 	}
 	
 	public boolean isOperateur() throws Exception{

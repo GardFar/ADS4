@@ -10,6 +10,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -41,6 +42,7 @@ public class EntreeTexte extends JPanel{
 	}
 	
 	public void initComponents(){
+		this.setBorder(BorderFactory.createRaisedBevelBorder());
 		
 		pane=new JTextPane();
 		scroll = new JScrollPane(pane, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

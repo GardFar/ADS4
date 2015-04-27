@@ -25,18 +25,9 @@ import java.util.HashMap;
 
 public class ChangeCouleurInstruction extends Instruction{
 
-	private static HashMap<String, Color> map=map();
 	private String couleur;
 	
 	
-	private static HashMap<String, Color> map(){
-		HashMap<String, Color> map=new HashMap<String, Color>();
-		map.put("rouge", Color.red);
-		map.put("bleu", Color.blue);
-		map.put("vert", Color.green);
-		map.put("gris", Color.gray);
-		return map;
-	}
 	public ChangeCouleurInstruction(String c){
 		super();
 		couleur=c;
@@ -49,8 +40,8 @@ public class ChangeCouleurInstruction extends Instruction{
 	@Override
 	public void exec(Canvas canvas, Graphics g) {
 		//CHANGER LA COULEUR DU PINCEAU
-		if(map.containsKey(couleur)){
-			g.setColor(map.get(couleur));
+		if(canvas.getMap().containsKey(couleur)){
+			g.setColor(canvas.getMap().get(couleur));
 		}
 	}
 

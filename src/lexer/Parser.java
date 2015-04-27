@@ -30,6 +30,7 @@ import vue.BlocInstruction;
 import vue.Canvas;
 import vue.ChangeCouleurInstruction;
 import vue.ChangeEpaisseurInstruction;
+import vue.ChangeFondInstruction;
 import vue.DefinitionInstruction;
 import vue.Div;
 import vue.Expression;
@@ -56,7 +57,8 @@ public class Parser {
 	 * 
 	 * nonTermDeclarations->VAR nonTermIdentificateur; nonTermDeclaration | rien
 	 * nonTermInstruction->Avance nonTermExpression | Tourne nonTermExpression | BasPinceau | HautPinceau |identificateur = nonTermExpression | ChangeCouleur nonTermIdentificateur
-	 *  | Debut nonTermBlocInstruction Fin | Si nonTermExpression Alors nonTermInstruction nonTermSinon | Tant que nonTermExpression Faire nonTermInstruction
+	 *  | Debut nonTermBlocInstruction Fin | Si nonTermExpression Alors nonTermInstruction nonTermSinon 
+	 *  | Tant que nonTermExpression Faire nonTermInstruction |ChangeCouleur nonTermIdentificateur
 	 * nonTermBlocInstruction -> nonTermInstruction ; nonTermBlocInstruction | rien
 	 * nonTermExpression-> nombre nonTermExpressionSuite | identificateur nonTermExpressionSuite | (nonTermExpression) nonTermExpressionSuite
 	 * nonTermExpressionSuite->nonTermOperateur nonTermExpressionSuite | rien
@@ -95,12 +97,20 @@ public class Parser {
 	public Instruction nontermInstruction() throws Exception {
 		Instruction i = null;
 		Sym s = reader.getSymbol();
+		String name;
 		switch (s) {
 		case CHANGECOULEUR:
 			term(Sym.CHANGECOULEUR);
-			String name = reader.getName();
+			name = reader.getName();
 			term(Sym.NAME);
 			i=new ChangeCouleurInstruction(name);
+			term(Sym.SEMI);
+			break;
+		case CHANGEFOND:
+			term(Sym.CHANGEFOND);
+			name = reader.getName();
+			term(Sym.NAME);
+			i=new ChangeFondInstruction(name);
 			term(Sym.SEMI);
 			break;
 		case CHANGEEPAISSEUR:

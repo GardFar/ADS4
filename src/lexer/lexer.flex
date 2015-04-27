@@ -40,6 +40,7 @@ variable = [a-z][a-zA-Z0-9]*
    "BasPinceau"	{return new Token(Sym.BASPINCEAU);}
    "ChangeCouleur"	{return new Token(Sym.CHANGECOULEUR);}
    "ChangeEpaisseur"	{return new Token(Sym.CHANGEEPAISSEUR);}
+   "ChangeFond"	{return new Token(Sym.CHANGEFOND);}
    
    "Debut"	{return new Token(Sym.DEBUT);}
    "Fin"	{return new Token(Sym.FIN);}

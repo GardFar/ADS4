@@ -23,8 +23,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -38,7 +40,6 @@ public class Canvas extends JPanel{
 	private int dimX;
 	private int dimY;
 	private Fenetre pere;
-	
 	private Tortue tortue;
 	
 	private Programme programme;
@@ -51,10 +52,28 @@ public class Canvas extends JPanel{
 		this.dimY=dimY;
 		this.pere=p;
 		setPreferredSize(new Dimension(dimX, dimY));
+		this.setBorder(BorderFactory.createRaisedBevelBorder());
 		tortue=new Tortue();
 	}
 	public void setInstructions(List<Instruction> l){
 		this.programme=new Programme(l);
+	}
+	
+	private static HashMap<String, Color> map=map();
+	
+	private static HashMap<String, Color> map(){
+		HashMap<String, Color> map=new HashMap<String, Color>();
+		map.put("rouge", Color.red);
+		map.put("bleu", Color.blue);
+		map.put("vert", Color.green);
+		map.put("gris", Color.gray);
+		map.put("rose", Color.PINK);
+		//En ajouter d'autres...
+		return map;
+	}
+	
+	public static HashMap<String, Color> getMap(){
+		return map;
 	}
 	
 	@Override
@@ -78,8 +97,15 @@ public class Canvas extends JPanel{
 		
 	}
 	
+	public void remplirFond(Color couleur, Graphics g){
+		Color tmp=g.getColor();
+		g.setColor(couleur);
+		g.fillRect(0, 0, dimX, dimY);
+		g.setColor(tmp);
+	}
+	
 	public Canvas(Fenetre p){
-		this(p,500, 500);
+		this(p,500, 570);
 	}
 	
 	public Tortue getTortue(){

@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
@@ -17,7 +18,8 @@ public class AffichageErreurs extends JPanel{
 	public AffichageErreurs(Fenetre p){
 		this.pere=p;
 		this.setLayout(new BorderLayout());
-		this.setPreferredSize(new Dimension(400, 500));
+		this.setPreferredSize(new Dimension(400, 200));
+		this.setBorder(BorderFactory.createRaisedBevelBorder());
 		initComponents();
 	}
 	

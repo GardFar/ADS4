@@ -19,6 +19,7 @@
 
 package vue;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -39,7 +40,17 @@ public class Fenetre extends JFrame{
 	public Fenetre(){
 		super();
 		setTitle("Tortue");
-		setLayout(new FlowLayout());
+		
+		initComponents();
+		
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setResizable(false);
+		pack();
+		setVisible(true);
+	}
+	
+	public void initComponents(){
+		setLayout(new BorderLayout());
 		ImageIcon icone=new ImageIcon("Images/koopa.png");
 		setIconImage(icone.getImage());
 		
@@ -47,15 +58,10 @@ public class Fenetre extends JFrame{
 		erreurs=new AffichageErreurs(this);
 		canvas=new Canvas(this);
 		
-		add(entree);
-		add(canvas);
+		add(entree, BorderLayout.LINE_START);
+		add(canvas, BorderLayout.LINE_END);
 		erreurs=new AffichageErreurs(this);
-		add(erreurs);
-		
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setResizable(false);
-		pack();
-		setVisible(true);
+		add(erreurs,BorderLayout.PAGE_END);
 	}
 	
 	public static void main(String[] args){
