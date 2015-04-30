@@ -23,16 +23,25 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.HashMap;
 
+/**
+ * Instruction qui change la couleur du pinceau de dessin.
+ * @author Q & A
+ *
+ */
 public class ChangeCouleurInstruction extends Instruction{
 
 	private Expression couleur;
 	
-	
+	/**
+	 * Cree un objet qui change la couleur du pinceau avec l'expression en parametre
+	 * @param e
+	 */
 	public ChangeCouleurInstruction(Expression e){
 		super();
 		couleur=e;
 	}
 	
+	@Override
 	public String toString(){
 		return "Changer couleur "+couleur;
 	}

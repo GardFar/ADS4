@@ -19,16 +19,27 @@
 
 package vue;
 
+/**
+ * Expression du type division
+ * @author Q & A
+ *
+ */
 public class Div extends Expression{
 	
 	Expression e1;
 	Expression e2;
 	
+	/**
+	 * Cree l'instruction e1/e2
+	 * @param e1
+	 * @param e2
+	 */
 	public Div(Expression e1, Expression e2){
 		this.e1=e1;
 		this.e2=e2;
 	}
 	
+	@Override
 	public int eval(ValueEnvironment env) throws Exception{
 		int m = e2.eval(env);
 		if(m == 0){

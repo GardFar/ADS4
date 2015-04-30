@@ -18,10 +18,18 @@
 
 
 package lexer;
-
+/**
+ * Jeton elementaire genere par le lexer
+ * @author Q & A
+ *
+ */
 public class Token {
 	private Sym symbol;
 	
+	/**
+	 * Cree un Token du symbole en parametre
+	 * @param s
+	 */
 	public Token(Sym s){
 		symbol=s;
 	}
@@ -31,6 +39,10 @@ public class Token {
 		return ""+symbol;
 	}
 
+	/**
+	 * Permet d'obtenir le symbole en parametre
+	 * @return
+	 */
 	public Sym getSymbol() {
 		return symbol;
 	}

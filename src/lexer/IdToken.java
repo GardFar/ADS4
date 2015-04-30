@@ -18,13 +18,28 @@
 
 package lexer;
 
+/**
+ * Token correspondant a un identifiant, pour une variable
+ * @author Q & A
+ *
+ */
 public class IdToken extends Token{
 	
 	private String name;
+	
+	/**
+	 * Cree un objet IdToken du type s et de nom name
+	 * @param s
+	 * @param name
+	 */
 	public IdToken(Sym s, String name) {
 		super(s);
 		this.name=name;
 	}
+	/**
+	 * Recupere le name de cet objet
+	 * @return
+	 */
 	public String getName() {
 		return name;
 	}

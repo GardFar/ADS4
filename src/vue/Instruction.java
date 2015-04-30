@@ -21,11 +21,22 @@ package vue;
 
 import java.awt.Graphics;
 
+/**
+ * La classe abstraite representant une Instruction du programme
+ * @author Q & A
+ *
+ */
 public abstract class Instruction {
+	@Override
 	public String toString(){
 		return "Instruction";
 	}
 	
-	//Execute l'instruction pour le canvas en paramtre, et en dessinant sur le graphics en parametre 
+	/**
+	 * Execute l'instruction pour le canvas en parametre, et en dessinant sur le graphics en parametre 
+	 * @param canvas
+	 * @param g
+	 * @throws Exception
+	 */
 	public abstract void exec(Canvas canvas, Graphics g) throws Exception;
 }

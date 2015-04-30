@@ -23,26 +23,33 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.HashMap;
 
+/**
+ * Instruction permettant de changer la couleur du fond du dessin. Il faut noter qu'on doit obligatoirement utiliser cette instruction avant de dessiner, 
+ * sinon le dessin sera recouvert.
+ * @author Q & A
+ *
+ */
 public class ChangeFondInstruction extends Instruction{
 
 private Expression couleur;
 	
-	
+	/**
+	 * Cree une instruction ChangeFond
+	 * @param e
+	 */
 	public ChangeFondInstruction(Expression e){
 		super();
 		couleur=e;
 	}
 	
+	@Override
 	public String toString(){
 		return "Changer fond "+couleur;
 	}
 	
 	@Override
 	public void exec(Canvas canvas, Graphics g) throws Exception{
-		//CHANGER LA COULEUR DU PINCEAU
 			canvas.remplirFond(new Color(couleur.eval(canvas.getEnv())), g);
-			//g.setColor(canvas.getMap().get(couleur));
-
 	}
 
 }

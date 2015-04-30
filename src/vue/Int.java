@@ -19,14 +19,24 @@
 
 package vue;
 
+/**
+ * Expression du type Entier
+ * @author Q & A
+ *
+ */
 public class Int extends Expression{
 	
 	int val;
 	
+	/**
+	 * Construit une expression du type Int a partir de l'entier en parametre
+	 * @param n
+	 */
 	public Int(int n){
 		val=n;
 	}
-	
+
+	@Override
 	public int eval(ValueEnvironment env){
 		return val;
 	}

@@ -21,14 +21,27 @@ package vue;
 
 import java.awt.Graphics;
 
+/**
+ * Instruction qui fait tourner la tortue de l'angle donne en argument
+ * @author Q & A
+ *
+ */
 public class TournerInstruction extends Instruction{
 
 	Expression angle;
 	
+	/**
+	 * Cree une instruction du type Tourne a;
+	 * @param a
+	 */
 	public TournerInstruction(Expression a){
 		angle=a;
 	}
 	
+	/**
+	 * Cree une instruction du type Tourne a;
+	 * @param a
+	 */
 	public TournerInstruction(int a){
 		angle = new Int(a);
 	}

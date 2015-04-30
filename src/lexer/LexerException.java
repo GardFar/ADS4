@@ -19,12 +19,22 @@
 
 package lexer;
 
+/**
+ * Exception generee par le lexer lorsqu'il ne reconnait pas un mot
+ * @author Q & A
+ *
+ */
 public class LexerException extends Exception {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 5410190160750195294L;
 
+	/**
+	 * Cree une LexerException a la ligne et colonne correspondantes
+	 * @param line La ligne
+	 * @param column La colonne
+	 */
 	public LexerException(int line, int column) {
 		super("Unexpected character at line " + line + " column " + column + ".");
 	}

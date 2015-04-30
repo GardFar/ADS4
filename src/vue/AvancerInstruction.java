@@ -21,18 +21,32 @@ package vue;
 
 import java.awt.Graphics;
 
+/**
+ * Instruction du type Avancer (ie Avancer + expression)
+ * @author Q & A
+ *
+ */
 public class AvancerInstruction extends Instruction{
 
 	Expression distance;
 	
+	/**
+	 * Cree une AvancerInstruction a partir de son expression
+	 * @param d
+	 */
 	public AvancerInstruction(Expression d){
 		distance=d;
 	}
 	
+	/**
+	 * Cree une AvancerInstruction a partir de la distance entiere parcourue
+	 * @param d
+	 */
 	public AvancerInstruction(int d){
 		distance = new Int(d);
 	}
 	
+	@Override
 	public String toString(){
 		return "Avancer de "+distance;
 	}

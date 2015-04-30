@@ -19,8 +19,19 @@
 
 package vue;
 
+/**
+ * Une classe abstraite correspondant a une Expression
+ * @author orpheus
+ *
+ */
 public abstract class Expression {
 	
+	/**
+	 * Evaluer l'expression et renvoyer sa valeur entiere
+	 * @param env
+	 * @return
+	 * @throws Exception
+	 */
 	public abstract int eval(ValueEnvironment env) throws Exception;
 	
 	

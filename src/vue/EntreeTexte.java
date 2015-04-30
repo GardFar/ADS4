@@ -1,8 +1,25 @@
+/*
+ * Copyright (C) <2015>  <AmbroiseT et QuentinP>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>
+ * 
+ */
+
 package vue;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,30 +30,35 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
 
 import compilateur.Compilateur;
-import lexer.Lexer;
-import lexer.LexerException;
-import lexer.Token;
-
+/**
+ * Panel permettant l'entree de texte pour le code
+ * @author Q & A
+ *
+ */
 public class EntreeTexte extends JPanel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2636940035913061373L;
 	private Fenetre pere; 
 	private JTextPane pane;
 	private JScrollPane scroll;
 	private JButton compiler;
 	private JButton executer;
 	
+	/**
+	 * Cree une EntreeTexte standard
+	 * @param p
+	 */
 	public EntreeTexte(Fenetre p){
 		this.pere=p;
 		this.setLayout(new BorderLayout());
@@ -44,7 +66,7 @@ public class EntreeTexte extends JPanel{
 		initComponents();
 	}
 	
-	public void initComponents(){
+	private void initComponents(){
 		this.setBorder(BorderFactory.createRaisedBevelBorder());
 		
 		pane=new JTextPane();

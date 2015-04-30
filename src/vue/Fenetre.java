@@ -20,16 +20,17 @@
 package vue;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+/**
+ * La fenetre principale, qui contindra tous les elements. Cette classe contient aussi la methode main qui lance le programme. 
+ * @author Q & A
+ *
+ */
 public class Fenetre extends JFrame{
 	/**
 	 * 
@@ -40,6 +41,9 @@ public class Fenetre extends JFrame{
 	
 	private AffichageErreurs erreurs;
 	
+	/**
+	 * Cree une fenetre standard.
+	 */
 	public Fenetre(){
 		super();
 		setTitle("Tortue");
@@ -52,7 +56,7 @@ public class Fenetre extends JFrame{
 		setVisible(true);
 	}
 	
-	public void initComponents(){
+	private void initComponents(){
 		setLayout(new BorderLayout());
 		Image icone=null;
 		try {
@@ -72,15 +76,26 @@ public class Fenetre extends JFrame{
 		add(erreurs,BorderLayout.PAGE_END);
 	}
 	
+	/**
+	 * La fonction qui demarre le programme
+	 * @param args
+	 */
 	public static void main(String[] args){
 		new Fenetre();
 		
 	}
 
+	/**
+	 * Permet de recuperer le Canvas de cette Fenetre
+	 * @return
+	 */
 	public Canvas getCanvas() {
 		return canvas;
 	}
-	
+	/**
+	 * Permet de recuperer l'affichage des erreurs de cette fentre
+	 * @return
+	 */
 	public AffichageErreurs getErreurs(){
 		return erreurs;
 	}

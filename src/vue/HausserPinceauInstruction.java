@@ -20,9 +20,16 @@
 package vue;
 
 import java.awt.Graphics;
-
+/**
+ * Instruction permettant de hausser le pinceau
+ * @author Q & A
+ *
+ */
 public class HausserPinceauInstruction extends Instruction{
 
+	/**
+	 * Construit une instruction hausse le pinceau
+	 */
 	public HausserPinceauInstruction(){
 		super();
 	}

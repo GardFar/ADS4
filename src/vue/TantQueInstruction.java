@@ -21,11 +21,21 @@ package vue;
 
 import java.awt.Graphics;
 
+/**
+ * Instruction du type Tant Que
+ * @author Q & A
+ *
+ */
 public class TantQueInstruction extends Instruction {
 
 	private Expression expr;
 	private Instruction inst;
 	
+	/**
+	 * Construit l'instruction tant que e faire i
+	 * @param e
+	 * @param i
+	 */
 	public TantQueInstruction(Expression e,Instruction i){
 		this.expr=e;
 		this.inst=i;

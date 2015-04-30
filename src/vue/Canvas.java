@@ -36,6 +36,11 @@ import javax.swing.JPanel;
 
 import compilateur.Programme;
 
+/**
+ * Panel sur lequel le code entre par l'utilisateur pourra dessiner.
+ * @author orpheus
+ *
+ */
 public class Canvas extends JPanel{
 	/**
 	 * 
@@ -51,7 +56,12 @@ public class Canvas extends JPanel{
 	
 	private ValueEnvironment env=new ValueEnvironment(); //A bouger plus tard, la ou les appelles de exec seront fait
 	
-	
+	/**
+	 * Cree un canvas des dimensions donnes en parametre dont le parent est la fentre en parametre
+	 * @param p
+	 * @param dimX
+	 * @param dimY
+	 */
 	public Canvas(Fenetre p , int dimX, int dimY){
 		this.dimX=dimX;
 		this.dimY=dimY;
@@ -65,6 +75,10 @@ public class Canvas extends JPanel{
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Set la liste d'instructions du Canvas
+	 * @param l
+	 */
 	public void setInstructions(List<Instruction> l){
 		this.programme=new Programme(l);
 	}
@@ -93,6 +107,11 @@ public class Canvas extends JPanel{
 		
 	}
 	
+	/**
+	 * Rempli le fond dans la couleur choisie. Attention, ceci recouvre les dessins faits avant!
+	 * @param couleur
+	 * @param g
+	 */
 	public void remplirFond(Color couleur, Graphics g){
 		Color tmp=g.getColor();
 		g.setColor(couleur);
@@ -100,22 +119,42 @@ public class Canvas extends JPanel{
 		g.setColor(tmp);
 	}
 	
+	/**
+	 * Cree un canvas de dimensions par defaut
+	 * @param p
+	 */
 	public Canvas(Fenetre p){
-		this(p,500, 570);
+		this(p,500, 600);
 	}
 	
+	/**
+	 * Permet d'obtenir la tortue
+	 * @return
+	 */
 	public Tortue getTortue(){
 		return tortue;
 	}
 	
+	/**
+	 * Donne la dimension verticale du canvas
+	 * @return
+	 */
 	public int getDimY(){
 		return this.dimY;
 	}
 	
+	/**
+	 * Donne la dimensio horizontale du Canvas
+	 * @return
+	 */
 	public int getDimX(){
 		return this.dimX;
 	}
 	
+	/**
+	 * Permet de recuperer la valueEnvironment (ie les variables) de cet objet
+	 * @return
+	 */
 	public ValueEnvironment getEnv(){
 		return env;
 	}

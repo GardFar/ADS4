@@ -22,7 +22,11 @@ package lexer;
 import java.io.File;
 import java.io.FileReader;
 import java.io.Reader;
-
+/**
+ * Simple classe utilisee pour le debug
+ * @author Q & A
+ *
+ */
 public class Test {
 	public static void main(String[] args) throws Exception{
 		File input = new File("Test.txt");

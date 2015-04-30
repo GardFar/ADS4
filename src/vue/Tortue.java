@@ -19,6 +19,11 @@
 
 package vue;
 
+/**
+ * Objet Tortue. C'est le curseur qui se deplace sur le canvas pour dessiner
+ * @author Q & A
+ *
+ */
 public class Tortue {
 	private int x;
 	private int y;
@@ -27,71 +32,102 @@ public class Tortue {
 	
 	public boolean haut=true;
 	
+	/**
+	 * Cree une tortue a  sa position de depart
+	 */
 	public Tortue(){
 		x=0;
 		y=0;
 		angle=90;
 	}
 
+	/**
+	 * Fait avancer la tortue de la distance donnee en argument.
+	 * @param distance
+	 */
 	public void avancer(int distance){
-		/*switch(angle){
-		case 0:
-			x+=distance;
-			break;
-		case 90:
-			y+=distance;
-			break;
-		case 180:
-			x-=distance;
-			break;
-		case 270:
-			y-=distance;
-			break;
-		}*/
 		int dX=(int)(distance*Math.cos(Math.toRadians(angle)));
 		int dY=(int)(distance*Math.sin(Math.toRadians(angle)));
 		x+=dX;
 		y+=dY;
 	}
 	
+	/**
+	 * Fait tourner la Tortue de l'angle donne en argument
+	 * @param angle
+	 */
 	public void tourner(int angle){
 		//Cette operation permet d'etre sur que l'angle est entre 0 et 360
 		this.angle=this.angle+angle;
-		//System.out.println(this.angle);
 	}
 	
+	/**
+	 * Recupere la position horizontale de la tortue
+	 * @return
+	 */
 	public int getX() {
 		return x;
 	}
 
+	/**
+	 * Modifie la position horizontale de la tortue
+	 * @return
+	 */
 	public void setX(int x) {
 		this.x = x;
 	}
 
+	/**
+	 * Recupere la position verticale de la tortue
+	 * @return
+	 */
 	public int getY() {
 		return y;
 	}
 
+	/**
+	 * Modifie la position verticale de la tortue
+	 * @return
+	 */
 	public void setY(int y) {
 		this.y = y;
 	}
 
+	/**
+	 * Donne l'angle de la tortue
+	 * @return
+	 */
 	public int getAngle() {
 		return angle;
 	}
-
+	
+	/**
+	 * Modifie l'angle de la tortue
+	 * @return
+	 */
 	public void setAngle(int angle) {
 		this.angle = angle;
 	}
 
+	/**
+	 * Dit si la tortue est en position haute ou non
+	 * @return
+	 */
 	public boolean isHaut() {
 		return haut;
 	}
 
+	/**
+	 * Permet de choisir si la tortue est en position haute ou non
+	 * @param haut
+	 */
 	public void setHaut(boolean haut) {
 		this.haut = haut;
 	}
 	
+	/**
+	 * ReInintialise la tortue a son point de depart sur le canvas
+	 */
 	public void reIni(){
 		x=0;
 		y=0;

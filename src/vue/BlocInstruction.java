@@ -22,10 +22,19 @@ package vue;
 import java.awt.Graphics;
 import java.util.List;
 
+/**
+ * Bloc d'instruction, ce qui est en soi une instruction
+ * @author Q & A
+ *
+ */
 public class BlocInstruction extends Instruction {
 
 	private List<Instruction> bloc;
 	
+	/**
+	 * Cree un bloc d'instruction a partir d'une liste d'instructions
+	 * @param l
+	 */
 	public BlocInstruction(List<Instruction> l){
 		bloc=l;
 	}

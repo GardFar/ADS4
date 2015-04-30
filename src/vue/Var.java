@@ -19,15 +19,24 @@
 
 package vue;
 
-
+/**
+ * Expression correspondant  a l'identifiant d'une variable.
+ * @author Q & A
+ *
+ */
 public class Var extends Expression{
 	
 	String name;
 	
+	/**
+	 * Cree une Var de nom st
+	 * @param st
+	 */
 	public Var(String st){
 		name=st;
 	}
 	
+	@Override
 	public int eval(ValueEnvironment env) throws Exception{
 		return env.getValue(name);
 	}

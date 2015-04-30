@@ -18,16 +18,36 @@
 
 package lexer;
 
+/**
+ * Token representant un entier Int
+ * @author orpheus
+ *
+ */
 public class IntToken extends Token{
 
 	private int val;
+	
+	/**
+	 * Construit un objet IntToken a partir de son type et de la chaine de caractere correspondant a sa valeur
+	 * @param s
+	 * @param str
+	 */
 	public IntToken(Sym s, String str) {
 		super(s);
 		setVal(Integer.parseInt(str));
 	}
+	
+	/**
+	 * Permet de recuperer la valeur du Token
+	 * @return
+	 */
 	public int getVal() {
 		return val;
 	}
+	/**
+	 * Permet de choisir la valeur du Token
+	 * @param val
+	 */
 	public void setVal(int val) {
 		this.val = val;
 	}

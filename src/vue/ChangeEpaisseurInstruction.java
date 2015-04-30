@@ -24,18 +24,32 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 
+/**
+ * Instruction qui change l'epaisseur du pinceau.
+ * @author Q & A
+ *
+ */
 public class ChangeEpaisseurInstruction extends Instruction{
 
 	Expression epaisseur;
 	
+	/**
+	 * Cree une Instruction qui change l'epaisseur du pinceau avec l'expression en parametre
+	 * @param d
+	 */
 	public ChangeEpaisseurInstruction(Expression d){
 		epaisseur=d;
 	}
 	
+	/**
+	 * Cree une Instruction qui change l'epaisseur du pinceau avec l'entier en parametre
+	 * @param d
+	 */
 	public ChangeEpaisseurInstruction(int d){
 		epaisseur = new Int(d);
 	}
 	
+	@Override
 	public String toString(){
 		return "Changer l'epaisseur du pinceau de "+epaisseur;
 	}

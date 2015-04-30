@@ -21,11 +21,21 @@ package vue;
 
 import java.awt.Graphics;
 
+/**
+ * Instruction correspondant a la declaration ou a l'affectation d'une variable
+ * @author Q & A
+ *
+ */
 public class DefinitionInstruction extends Instruction {
 
 	String name;
 	Expression value;
 	
+	/**
+	 * Construit une DefinitionInstruction a partir du nom de la variable et de l'expression a laquelle on l'affecte
+	 * @param name
+	 * @param value
+	 */
 	public DefinitionInstruction(String name,Expression value){
 		this.name=name;
 		this.value=value;

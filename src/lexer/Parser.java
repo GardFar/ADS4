@@ -46,6 +46,11 @@ import vue.TantQueInstruction;
 import vue.TournerInstruction;
 import vue.Var;
 
+/**
+ * Parser Correspondant a la grammaire donnee en enonce. Si tout se passe bien, il genere un Programme
+ * @author Q & A
+ *
+ */
 public class Parser {
 
 	LookAheadReader reader;
@@ -67,20 +72,38 @@ public class Parser {
 	 * nonTermSinon->Sinon nonTermInstruction | rien
 	 */
 
+	/**
+	 * Contruit un objet Parser a partir d'un reader en parametre
+	 * @param r
+	 */
 	public Parser(LookAheadReader r) {
 		this.reader = r;
 		this.instructions = new ArrayList<Instruction>();
 	}
 
+	/**
+	 * Terme terminal du symbole s
+	 * @param s
+	 * @throws Exception
+	 */
 	public void term(Sym s) throws Exception {
 		reader.eat(s);
 	}
 
+	/**
+	 * Terme non terminal de type Programme
+	 * @throws Exception
+	 */
 	public void nonTermProgramme() throws Exception {
 		instructions.addAll(nontermDeclarations());
 		instructions.add(nontermInstruction());
 	}
 
+	/**
+	 * Terme non terminal de type Declarations
+	 * @return
+	 * @throws Exception
+	 */
 	public LinkedList<Instruction> nontermDeclarations() throws Exception {
 		if (reader.check(Sym.VAR)) {
 			term(Sym.VAR);
@@ -95,6 +118,11 @@ public class Parser {
 		return new LinkedList<Instruction>();
 	}
 
+	/**
+	 * Terme non terminal de type Instruction
+	 * @return
+	 * @throws Exception
+	 */
 	public Instruction nontermInstruction() throws Exception {
 		Instruction i = null;
 		Sym s = reader.getSymbol();
@@ -168,6 +196,11 @@ public class Parser {
 	}
 	
 
+	/**
+	 * Terme non terminal de type Sinon
+	 * @return
+	 * @throws Exception
+	 */
 	private Instruction nontermSinon() throws Exception{
 		if(reader.check(Sym.SINON)){
 			term(Sym.SINON);
@@ -176,6 +209,11 @@ public class Parser {
 		return null;
 	}
 
+	/**
+	 * Terme non terminal de type BlocInstruction
+	 * @return
+	 * @throws Exception
+	 */
 	public LinkedList<Instruction> nontermBlocInstruction() throws Exception{
 		if(reader.isInstruction()){
 			Instruction i = nontermInstruction();
@@ -186,6 +224,11 @@ public class Parser {
 		return new LinkedList<Instruction>();
 	}
 	
+	/**
+	 * Terme non terminal de type Expression
+	 * @return
+	 * @throws Exception
+	 */
 	public Expression nontermExpression() throws Exception{
 		if(reader.check(Sym.NOMBRE)){
 			Expression e = new Int(reader.getValue());
@@ -204,6 +247,12 @@ public class Parser {
 		throw new Exception("Erreur : Expression non reconnue");
 	}
 	
+	/**
+	 * Terme non terminal de type ExpressionSuite
+	 * @param e
+	 * @return
+	 * @throws Exception
+	 */
 	public Expression nontermExpressionSuite(Expression e) throws Exception{
 		if(reader.isOperateur()){
 			Expression e2 = nontermOperateur(e);
@@ -212,6 +261,12 @@ public class Parser {
 		return e;
 	}
 		
+	/**
+	 * Terme non terminal de type Operateur
+	 * @param e
+	 * @return
+	 * @throws Exception
+	 */
 	public Expression nontermOperateur(Expression e) throws Exception{
 		Expression r = null;
 		Sym s = reader.getSymbol();
@@ -245,6 +300,11 @@ public class Parser {
 		}
 	}
 	
+	/**
+	 * Terme non terminal de type Expression2
+	 * @return
+	 * @throws Exception
+	 */
 	public Expression nontermExpression2() throws Exception{
 		if(reader.check(Sym.NOMBRE)){
 			Expression e = new Int(reader.getValue());
@@ -263,6 +323,12 @@ public class Parser {
 		throw new Exception("Erreur : Expression non reconnue");
 	}
 	
+	/**
+	 * Terme non terminal de type ExpressionSuite2
+	 * @param e
+	 * @return
+	 * @throws Exception
+	 */
 	public Expression nontermExpressionSuite2(Expression e) throws Exception{
 		if(reader.isOperateur() && !reader.check(Sym.COMMA)){
 			Expression e2 = nontermOperateur2(e);
@@ -270,7 +336,13 @@ public class Parser {
 		}
 		return e;
 	}
-		
+	
+	/**
+	 * Terme non terminal de type Operateur2
+	 * @param e
+	 * @return
+	 * @throws Exception
+	 */
 	public Expression nontermOperateur2(Expression e) throws Exception{
 		Expression r = null;
 		Sym s = reader.getSymbol();
@@ -298,6 +370,10 @@ public class Parser {
 		}
 	}
 
+	/**
+	 * ermet de recuperer les instructions generees par le parseur
+	 * @return
+	 */
 	public List<Instruction> getInstructions() {
 		return instructions;
 	}

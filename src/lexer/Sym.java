@@ -19,6 +19,11 @@
 
 package lexer;
 
+/**
+ * Enum representant les symboles des Token generes par le lexer
+ * @author Q & A
+ *
+ */
 public enum Sym {
 	NOMBRE, LPAR, RPAR, DIV,TIMES, PLUS, MINUS, VAR, AVANCE,
 	TOURNE, HAUTPINCEAU, BASPINCEAU, DEBUT, FIN, NAME, EQ, SEMI, COMMA, EOF,

@@ -21,12 +21,23 @@ package vue;
 
 import java.awt.Graphics;
 
+/**
+ * Instruction du type Si.. alors...Sinon
+ * @author Q & A
+ *
+ */
 public class SiInstruction extends Instruction {
 
 	private Expression expr;
 	private Instruction instSI;
 	private Instruction instSINON;
 	
+	/**
+	 * Cree l'instruction Si e alors faire i1 sinon faire i2
+	 * @param e
+	 * @param i1
+	 * @param i2
+	 */
 	public SiInstruction(Expression e,Instruction i1,Instruction i2){
 		this.expr=e;
 		this.instSI=i1;

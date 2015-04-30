@@ -21,8 +21,16 @@ package vue;
 
 import java.awt.Graphics;
 
+/**
+ * Instruction du type baisser pinceau
+ * @author Q & A
+ *
+ */
 public class BaisserPinceauInstruction extends Instruction{
 
+	/**
+	 * Cree une instruction BaisserPinceau
+	 */
 	public BaisserPinceauInstruction(){
 		super();
 	}
