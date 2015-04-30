@@ -120,4 +120,18 @@ public class Fenetre extends JFrame{
 			}
 		}
 	}
+
+	public void sauvegarder() {
+		JFileChooser JFC = new JFileChooser();
+		int returnVal = JFC.showOpenDialog(null);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			try {
+				String chemin=JFC.getSelectedFile().toString();
+				File fw = new File(chemin);
+				entree.sauvegarder(fw);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
 }

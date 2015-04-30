@@ -40,6 +40,10 @@ public class Menu extends JMenuBar{
 	
 	private Fenetre pere;
 	
+	/**
+	 * Cree un menu
+	 * @param p
+	 */
 	public Menu(Fenetre p){
 		super();
 		this.pere=p;
@@ -51,6 +55,15 @@ public class Menu extends JMenuBar{
 		this.add(fichier);
 		
 		JMenuItem charger = new JMenuItem("Charger");
+		JMenuItem sauvegarder = new JMenuItem("Sauvegarder");
+		sauvegarder.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				pere.sauvegarder();
+			}
+			
+		});
 		charger.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -58,6 +71,7 @@ public class Menu extends JMenuBar{
 			}
 			
 		});
+		fichier.add(sauvegarder);
 		fichier.add(charger);
 	}
 }
