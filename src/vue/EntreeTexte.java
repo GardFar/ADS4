@@ -23,6 +23,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
@@ -114,5 +115,20 @@ public class EntreeTexte extends JPanel{
 			}
 			
 		});
+	}
+
+	public void charger(FileReader reader) {
+		pane.setText("");
+		int c=0;
+		String s="";
+		while(c!=-1){
+			s+=((char)c);
+			try {
+				c = reader.read();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		pane.setText(s);
 	}
 }

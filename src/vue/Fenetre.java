@@ -21,9 +21,12 @@ package vue;
 
 import java.awt.BorderLayout;
 import java.awt.Image;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 /**
@@ -38,7 +41,7 @@ public class Fenetre extends JFrame{
 	private static final long serialVersionUID = 1168286374302260479L;
 	private Canvas canvas;
 	private EntreeTexte entree;
-	
+	private Menu menu;
 	private AffichageErreurs erreurs;
 	
 	/**
@@ -70,6 +73,9 @@ public class Fenetre extends JFrame{
 		erreurs=new AffichageErreurs(this);
 		canvas=new Canvas(this);
 		
+		menu=new Menu(this);
+		this.setJMenuBar(menu);
+		
 		add(entree, BorderLayout.LINE_START);
 		add(canvas, BorderLayout.LINE_END);
 		erreurs=new AffichageErreurs(this);
@@ -98,5 +104,20 @@ public class Fenetre extends JFrame{
 	 */
 	public AffichageErreurs getErreurs(){
 		return erreurs;
+	}
+	
+	public void charger(){
+		JFileChooser JFC = new JFileChooser();
+		int returnVal = JFC.showOpenDialog(null);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			try {
+				String chemin=JFC.getSelectedFile().toString();
+				File fw = new File(chemin);
+				FileReader reader=new FileReader(fw);
+				entree.charger(reader);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
 	}
 }
