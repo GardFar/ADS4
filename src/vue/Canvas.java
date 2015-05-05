@@ -23,16 +23,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 
 import compilateur.Programme;
 
@@ -49,7 +47,7 @@ public class Canvas extends JPanel{
 	private int dimX;
 	private int dimY;
 	private Fenetre pere;
-	private Tortue tortue;
+	protected Tortue tortue;
 	
 	BufferedImage spriteTurtle;
 	private Programme programme;
@@ -90,12 +88,16 @@ public class Canvas extends JPanel{
 		if(pere.getErreurs()!=null){
 			pere.getErreurs().effacerContenu();
 		}
+		//Graphics2D g2d=(Graphics2D) g;
+		//g2d.setBackground(Color.GREEN);
 		g.setColor(Color.GREEN);
 		g.fillRect(0, 0, dimX, dimY);
 		
 		g.setColor(Color.RED);
 		if(programme!=null){
 			try{
+				//Dessinateur d=new Dessinateur(programme, this, g);
+				//d.run();
 				programme.executer(this, g);
 			}
 			catch(Exception e){
@@ -107,6 +109,10 @@ public class Canvas extends JPanel{
 		
 	}
 	
+	public void recevoirException(Exception e){
+		pere.getErreurs().ecrireException(e.getMessage());
+	}
+	
 	/**
 	 * Rempli le fond dans la couleur choisie. Attention, ceci recouvre les dessins faits avant!
 	 * @param couleur
@@ -114,6 +120,8 @@ public class Canvas extends JPanel{
 	 */
 	public void remplirFond(Color couleur, Graphics g){
 		Color tmp=g.getColor();
+		//Graphics2D g2d=(Graphics2D) g;
+		//g2d.setBackground(couleur);
 		g.setColor(couleur);
 		g.fillRect(0, 0, dimX, dimY);
 		g.setColor(tmp);

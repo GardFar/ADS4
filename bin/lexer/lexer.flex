@@ -24,38 +24,38 @@ variable = [a-z][a-zA-Z0-9]*
 
 <YYINITIAL> {
 
-   {nombre}	{return new IntToken(Sym.NOMBRE, yytext());}
-   [(]		{return new Token(Sym.LPAR);}
-   [)]		{return new Token(Sym.RPAR);}
-   [/]		{return new Token(Sym.DIV);}  
-   [*]		{return new Token(Sym.TIMES);}
-   [+]		{return new Token(Sym.PLUS);}
-   [-]		{return new Token(Sym.MINUS);}
+   {nombre}	{return new IntToken(Sym.NOMBRE, yytext(), yyline, yycolumn);}
+   [(]		{return new Token(Sym.LPAR, yyline, yycolumn);}
+   [)]		{return new Token(Sym.RPAR, yyline, yycolumn);}
+   [/]		{return new Token(Sym.DIV, yyline, yycolumn);}  
+   [*]		{return new Token(Sym.TIMES, yyline, yycolumn);}
+   [+]		{return new Token(Sym.PLUS, yyline, yycolumn);}
+   [-]		{return new Token(Sym.MINUS, yyline, yycolumn);}
    
    //Identificateurs (modifier?)
-   "Var"	{return new Token(Sym.VAR);}
-   "Avance"	{return new Token(Sym.AVANCE);}
-   "Tourne"	{return new Token(Sym.TOURNE);}
-   "HautPinceau" {return new Token(Sym.HAUTPINCEAU);}
-   "BasPinceau"	{return new Token(Sym.BASPINCEAU);}
-   "ChangeCouleur"	{return new Token(Sym.CHANGECOULEUR);}
-   "ChangeEpaisseur"	{return new Token(Sym.CHANGEEPAISSEUR);}
-   "ChangeFond"	{return new Token(Sym.CHANGEFOND);}
+   "Var"	{return new Token(Sym.VAR, yyline, yycolumn);}
+   "Avance"	{return new Token(Sym.AVANCE, yyline, yycolumn);}
+   "Tourne"	{return new Token(Sym.TOURNE, yyline, yycolumn);}
+   "HautPinceau" {return new Token(Sym.HAUTPINCEAU, yyline, yycolumn);}
+   "BasPinceau"	{return new Token(Sym.BASPINCEAU, yyline, yycolumn);}
+   "ChangeCouleur"	{return new Token(Sym.CHANGECOULEUR, yyline, yycolumn);}
+   "ChangeEpaisseur"	{return new Token(Sym.CHANGEEPAISSEUR, yyline, yycolumn);}
+   "ChangeFond"	{return new Token(Sym.CHANGEFOND, yyline, yycolumn);}
    
-   "Debut"	{return new Token(Sym.DEBUT);}
-   "Fin"	{return new Token(Sym.FIN);}
-   "Si"    {return new Token(Sym.SI);}
-   "Alors" {return new Token(Sym.ALORS);}
-   "Sinon" {return new Token(Sym.SINON);}
-   "Tant que" {return new Token(Sym.TANTQUE);}
-   "Faire" {return new Token(Sym.FAIRE);}
+   "Debut"	{return new Token(Sym.DEBUT, yyline, yycolumn);}
+   "Fin"	{return new Token(Sym.FIN, yyline, yycolumn);}
+   "Si"    {return new Token(Sym.SI, yyline, yycolumn);}
+   "Alors" {return new Token(Sym.ALORS, yyline, yycolumn);}
+   "Sinon" {return new Token(Sym.SINON, yyline, yycolumn);}
+   "Tant que" {return new Token(Sym.TANTQUE, yyline, yycolumn);}
+   "Faire" {return new Token(Sym.FAIRE, yyline, yycolumn);}
    
-   {variable}	{return new IdToken(Sym.NAME, yytext());}
-   [=]		{return new Token(Sym.EQ);}
-   [;]		{return new Token(Sym.SEMI);}
-   [,]      {return new Token(Sym.COMMA);}
+   {variable}	{return new IdToken(Sym.NAME, yytext(), yyline, yycolumn);}
+   [=]		{return new Token(Sym.EQ, yyline, yycolumn);}
+   [;]		{return new Token(Sym.SEMI, yyline, yycolumn);}
+   [,]      {return new Token(Sym.COMMA, yyline, yycolumn);}
    {blank}	{}
-   <<EOF>>	{return new Token(Sym.EOF);}
+   <<EOF>>	{return new Token(Sym.EOF, yyline, yycolumn);}
    [^]		{throw new LexerException(yyline, yycolumn);}
 }
 

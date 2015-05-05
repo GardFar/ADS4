@@ -36,6 +36,11 @@ public class IdToken extends Token{
 		super(s);
 		this.name=name;
 	}
+	
+	public IdToken(Sym s, String name, int l, int c) {
+		super(s, l, c);
+		this.name=name;
+	}
 	/**
 	 * Recupere le name de cet objet
 	 * @return

@@ -190,7 +190,7 @@ public class Parser {
 			i= new TantQueInstruction(eTq,nontermInstruction());
 			break;
 		default:
-			throw new Exception("Erreur : Instruction non reconnue");
+			throw new Exception("Erreur : Instruction non reconnue a ligne "+reader.getLigne()+", colonne "+reader.getColonne());
 		}
 		return i;
 	}
@@ -244,7 +244,7 @@ public class Parser {
 			term(Sym.RPAR);
 			return nontermExpressionSuite(e);
 		}
-		throw new Exception("Erreur : Expression non reconnue");
+		throw new Exception("Erreur : Expression non reconnuea ligne "+reader.getLigne()+", colonne "+reader.getColonne());
 	}
 	
 	/**
@@ -296,7 +296,7 @@ public class Parser {
 			return r;	
 			
 		default:
-			throw new Exception("Erreur : Operateur non reconnu");
+			throw new Exception("Erreur : Operateur non reconnua ligne "+reader.getLigne()+", colonne "+reader.getColonne());
 		}
 	}
 	
@@ -320,7 +320,7 @@ public class Parser {
 			term(Sym.RPAR);
 			return nontermExpressionSuite2(e);
 		}
-		throw new Exception("Erreur : Expression non reconnue");
+		throw new Exception("Erreur : Expression non reconnuea ligne "+reader.getLigne()+", colonne "+reader.getColonne());
 	}
 	
 	/**
@@ -366,7 +366,7 @@ public class Parser {
 		case COMMA:
 			return e;
 		default:
-			throw new Exception("Erreur : Operateur non reconnu");
+			throw new Exception("Erreur : Operateur non reconnua ligne "+reader.getLigne()+", colonne "+reader.getColonne());
 		}
 	}
 

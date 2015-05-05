@@ -26,12 +26,21 @@ package lexer;
 public class Token {
 	private Sym symbol;
 	
+	protected int ligne;
+	protected int colonne;
+	
 	/**
 	 * Cree un Token du symbole en parametre
 	 * @param s
 	 */
 	public Token(Sym s){
 		symbol=s;
+	}
+	
+	public Token(Sym s, int l, int c){
+		symbol=s;
+		this.ligne=l;
+		this.colonne=c;
 	}
 	
 	@Override
@@ -45,5 +54,13 @@ public class Token {
 	 */
 	public Sym getSymbol() {
 		return symbol;
+	}
+	
+	public int getLigne(){
+		return ligne;
+	}
+	
+	public int getColonne(){
+		return colonne;
 	}
 }

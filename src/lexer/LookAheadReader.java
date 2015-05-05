@@ -39,6 +39,13 @@ public class LookAheadReader {
 		cur=lexer.yylex();
 	}
 	
+	public int getLigne(){
+		return cur.getLigne();
+	}
+	
+	public int getColonne(){
+		return cur.getColonne();
+	}
 	/**
 	 * Verifie si le Token actuel est bine du type s
 	 * @param s Le type
@@ -56,7 +63,7 @@ public class LookAheadReader {
 	 */
 	public void eat(Sym s) throws Exception{
 		if(!check(s)){
-			throw new Exception("Impossible de manger "+s+", l'actuel est "+cur);
+			throw new Exception("Impossible de manger "+s+", l'actuel est "+cur+" a ligne "+getLigne()+", colonne "+getColonne());
 		}
 		System.out.println(s);
 		cur=lexer.yylex();

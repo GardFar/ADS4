@@ -43,6 +43,7 @@ public class BlocInstruction extends Instruction {
 	public void exec(Canvas canvas, Graphics g) throws Exception {
 		for(Instruction i:bloc){
 			i.exec(canvas, g);
+			Thread.sleep(200);
 		}
 		
 	}

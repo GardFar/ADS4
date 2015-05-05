@@ -37,6 +37,11 @@ public class IntToken extends Token{
 		setVal(Integer.parseInt(str));
 	}
 	
+	public IntToken(Sym s, String str, int l, int c) {
+		super(s,l, c);
+		setVal(Integer.parseInt(str));
+	}
+	
 	/**
 	 * Permet de recuperer la valeur du Token
 	 * @return
