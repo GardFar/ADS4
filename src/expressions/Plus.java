@@ -17,26 +17,35 @@
  */
 
 
-package vue;
 
-import java.awt.Graphics;
+package expressions;
+
+import vue.ValueEnvironment;
+
 
 /**
- * La classe abstraite representant une Instruction du programme
+ * Expression du type Addition
  * @author Q & A
  *
  */
-public abstract class Instruction {
-	@Override
-	public String toString(){
-		return "Instruction";
-	}
+public class Plus extends Expression{
+	
+	Expression e1;
+	Expression e2;
 	
 	/**
-	 * Execute l'instruction pour le canvas en parametre, et en dessinant sur le graphics en parametre 
-	 * @param canvas
-	 * @param g
-	 * @throws Exception
+	 * Cree l'expression e1+e2
+	 * @param e1
+	 * @param e2
 	 */
-	public abstract void exec(Canvas canvas, Graphics g) throws Exception;
+	public Plus(Expression e1, Expression e2){
+		this.e1=e1;
+		this.e2=e2;
+	}
+	
+	@Override
+	public int eval(ValueEnvironment env) throws Exception{
+		return e1.eval(env)+e2.eval(env);
+	}
+	
 }

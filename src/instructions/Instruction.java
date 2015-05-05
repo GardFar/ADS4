@@ -17,28 +17,28 @@
  */
 
 
-package vue;
+package instructions;
+
+import java.awt.Graphics;
+
+import vue.Canvas;
 
 /**
- * Expression du type Entier
+ * La classe abstraite representant une Instruction du programme
  * @author Q & A
  *
  */
-public class Int extends Expression{
-	
-	int val;
+public abstract class Instruction {
+	@Override
+	public String toString(){
+		return "Instruction";
+	}
 	
 	/**
-	 * Construit une expression du type Int a partir de l'entier en parametre
-	 * @param n
+	 * Execute l'instruction pour le canvas en parametre, et en dessinant sur le graphics en parametre 
+	 * @param canvas
+	 * @param g
+	 * @throws Exception
 	 */
-	public Int(int n){
-		val=n;
-	}
-
-	@Override
-	public int eval(ValueEnvironment env){
-		return val;
-	}
-	
+	public abstract void exec(Canvas canvas, Graphics g) throws Exception;
 }

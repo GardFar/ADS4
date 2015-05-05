@@ -17,35 +17,34 @@
  */
 
 
-package vue;
 
-import java.awt.Graphics;
-import java.util.List;
+package expressions;
+
+import vue.ValueEnvironment;
 
 /**
- * Bloc d'instruction, ce qui est en soi une instruction
+ * Expression du type Moins
  * @author Q & A
  *
  */
-public class BlocInstruction extends Instruction {
-
-	private List<Instruction> bloc;
+public class Minus extends Expression{
+	
+	Expression e1;
+	Expression e2;
 	
 	/**
-	 * Cree un bloc d'instruction a partir d'une liste d'instructions
-	 * @param l
+	 * Cree l'expression e1-e2
+	 * @param e1
+	 * @param e2
 	 */
-	public BlocInstruction(List<Instruction> l){
-		bloc=l;
+	public Minus(Expression e1, Expression e2){
+		this.e1=e1;
+		this.e2=e2;
 	}
 	
 	@Override
-	public void exec(Canvas canvas, Graphics g) throws Exception {
-		for(Instruction i:bloc){
-			i.exec(canvas, g);
-			Thread.sleep(200);
-		}
-		
+	public int eval(ValueEnvironment env) throws Exception{
+		return e1.eval(env)-e2.eval(env);
 	}
-
+	
 }

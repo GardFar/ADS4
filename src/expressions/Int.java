@@ -17,39 +17,30 @@
  */
 
 
-package vue;
+package expressions;
 
-import java.awt.Graphics;
+import vue.ValueEnvironment;
 
 /**
- * Instruction qui fait tourner la tortue de l'angle donne en argument
+ * Expression du type Entier
  * @author Q & A
  *
  */
-public class TournerInstruction extends Instruction{
+public class Int extends Expression{
+	
+	int val;
+	
+	/**
+	 * Construit une expression du type Int a partir de l'entier en parametre
+	 * @param n
+	 */
+	public Int(int n){
+		val=n;
+	}
 
-	Expression angle;
-	
-	/**
-	 * Cree une instruction du type Tourne a;
-	 * @param a
-	 */
-	public TournerInstruction(Expression a){
-		angle=a;
-	}
-	
-	/**
-	 * Cree une instruction du type Tourne a;
-	 * @param a
-	 */
-	public TournerInstruction(int a){
-		angle = new Int(a);
-	}
-	
 	@Override
-	public void exec(Canvas canvas, Graphics g) throws Exception {
-		Tortue t=canvas.getTortue();
-		t.tourner(angle.eval(canvas.getEnv()));
+	public int eval(ValueEnvironment env){
+		return val;
 	}
-
+	
 }

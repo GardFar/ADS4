@@ -17,47 +17,58 @@
  */
 
 
-package vue;
+package instructions;
 
-import java.awt.BasicStroke;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Stroke;
+
+import vue.Canvas;
+import expressions.Expression;
+import expressions.Int;
+import vue.ValueEnvironment;
+import vue.Tortue;
+
 
 /**
- * Instruction qui change l'epaisseur du pinceau.
+ * Instruction du type Avancer (ie Avancer + expression)
  * @author Q & A
  *
  */
-public class ChangeEpaisseurInstruction extends Instruction{
+public class AvancerInstruction extends Instruction{
 
-	Expression epaisseur;
+	Expression distance;
 	
 	/**
-	 * Cree une Instruction qui change l'epaisseur du pinceau avec l'expression en parametre
+	 * Cree une AvancerInstruction a partir de son expression
 	 * @param d
 	 */
-	public ChangeEpaisseurInstruction(Expression d){
-		epaisseur=d;
+	public AvancerInstruction(Expression d){
+		distance=d;
 	}
 	
 	/**
-	 * Cree une Instruction qui change l'epaisseur du pinceau avec l'entier en parametre
+	 * Cree une AvancerInstruction a partir de la distance entiere parcourue
 	 * @param d
 	 */
-	public ChangeEpaisseurInstruction(int d){
-		epaisseur = new Int(d);
+	public AvancerInstruction(int d){
+		distance = new Int(d);
 	}
 	
 	@Override
 	public String toString(){
-		return "Changer l'epaisseur du pinceau de "+epaisseur;
+		return "Avancer de "+distance;
 	}
 	
 	@Override
 	public void exec(Canvas canvas, Graphics g) throws Exception {
-		Graphics2D g2D=(Graphics2D)g;
-		g2D.setStroke(new BasicStroke((float) epaisseur.eval(canvas.getEnv())));
+		Tortue t=canvas.getTortue();
+		int x0=t.getX();
+		int y0=canvas.getDimY()-t.getY();
+		t.avancer(distance.eval(canvas.getEnv()));
+		if(t.getX()<0 || t.getY()<0 || t.getX()>canvas.getDimX() || t.getY()>canvas.getDimY()){
+			throw new Exception("Tortue sortie du cadre");
+		}
+		if(!t.isHaut())
+			g.drawLine(x0, y0, t.getX(), canvas.getDimY()-t.getY());
 	}
 
 }

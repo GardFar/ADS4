@@ -20,6 +20,8 @@ package vue;
 
 import java.awt.Color;
 
+import expressions.Expression;
+
 /**
  * Classe representant une expression qui code une couleur RVB
  * @author Q & A

@@ -17,42 +17,44 @@
  */
 
 
-package vue;
+package instructions;
 
 import java.awt.Graphics;
 
+import vue.Canvas;
+import vue.Tortue;
+import expressions.Expression;
+import expressions.Int;
+
 /**
- * Instruction du type Si.. alors...Sinon
+ * Instruction qui fait tourner la tortue de l'angle donne en argument
  * @author Q & A
  *
  */
-public class SiInstruction extends Instruction {
+public class TournerInstruction extends Instruction{
 
-	private Expression expr;
-	private Instruction instSI;
-	private Instruction instSINON;
+	Expression angle;
 	
 	/**
-	 * Cree l'instruction Si e alors faire i1 sinon faire i2
-	 * @param e
-	 * @param i1
-	 * @param i2
+	 * Cree une instruction du type Tourne a;
+	 * @param a
 	 */
-	public SiInstruction(Expression e,Instruction i1,Instruction i2){
-		this.expr=e;
-		this.instSI=i1;
-		this.instSINON=i2;
+	public TournerInstruction(Expression a){
+		angle=a;
+	}
+	
+	/**
+	 * Cree une instruction du type Tourne a;
+	 * @param a
+	 */
+	public TournerInstruction(int a){
+		angle = new Int(a);
 	}
 	
 	@Override
 	public void exec(Canvas canvas, Graphics g) throws Exception {
-		if(expr.eval(canvas.getEnv())!=0){
-			instSI.exec(canvas,g);		
-		}
-		else if(instSINON!=null){
-			instSINON.exec(canvas, g);
-		}
-		
+		Tortue t=canvas.getTortue();
+		t.tourner(angle.eval(canvas.getEnv()));
 	}
 
 }

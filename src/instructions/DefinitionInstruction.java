@@ -17,38 +17,42 @@
  */
 
 
-package vue;
+package instructions;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.util.HashMap;
+
+import vue.Canvas;
+import expressions.Expression;
 
 /**
- * Instruction qui change la couleur du pinceau de dessin.
+ * Instruction correspondant a la declaration ou a l'affectation d'une variable
  * @author Q & A
  *
  */
-public class ChangeCouleurInstruction extends Instruction{
+public class DefinitionInstruction extends Instruction {
 
-	private Expression couleur;
+	String name;
+	Expression value;
 	
 	/**
-	 * Cree un objet qui change la couleur du pinceau avec l'expression en parametre
-	 * @param e
+	 * Construit une DefinitionInstruction a partir du nom de la variable et de l'expression a laquelle on l'affecte
+	 * @param name
+	 * @param value
 	 */
-	public ChangeCouleurInstruction(Expression e){
-		super();
-		couleur=e;
-	}
-	
-	@Override
-	public String toString(){
-		return "Changer couleur "+couleur;
+	public DefinitionInstruction(String name,Expression value){
+		this.name=name;
+		this.value=value;
 	}
 	
 	@Override
 	public void exec(Canvas canvas, Graphics g) throws Exception{
-		g.setColor(new Color(couleur.eval(canvas.getEnv())));
+		if(value!=null){
+			canvas.getEnv().setVar(name, value.eval(canvas.getEnv()));
+		}
+		else{
+			//J'ai ajoute cela dans le cas ou on ne fait que declarer une variable
+			canvas.getEnv().setVar(name, 0);
+		}
 		
 	}
 

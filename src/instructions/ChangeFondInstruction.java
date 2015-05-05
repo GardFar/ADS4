@@ -17,35 +17,42 @@
  */
 
 
-package vue;
+package instructions;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.util.HashMap;
+
+import vue.Canvas;
+import expressions.Expression;
 
 /**
- * Expression du type division
+ * Instruction permettant de changer la couleur du fond du dessin. Il faut noter qu'on doit obligatoirement utiliser cette instruction avant de dessiner, 
+ * sinon le dessin sera recouvert.
  * @author Q & A
  *
  */
-public class Div extends Expression{
-	
-	Expression e1;
-	Expression e2;
+public class ChangeFondInstruction extends Instruction{
+
+private Expression couleur;
 	
 	/**
-	 * Cree l'instruction e1/e2
-	 * @param e1
-	 * @param e2
+	 * Cree une instruction ChangeFond
+	 * @param e
 	 */
-	public Div(Expression e1, Expression e2){
-		this.e1=e1;
-		this.e2=e2;
+	public ChangeFondInstruction(Expression e){
+		super();
+		couleur=e;
 	}
 	
 	@Override
-	public int eval(ValueEnvironment env) throws Exception{
-		int m = e2.eval(env);
-		if(m == 0){
-			throw new ArithmeticException("Erreur : Division par 0");
-		}
-		return e1.eval(env)/m;
+	public String toString(){
+		return "Changer fond "+couleur;
 	}
 	
+	@Override
+	public void exec(Canvas canvas, Graphics g) throws Exception{
+			canvas.remplirFond(new Color(couleur.eval(canvas.getEnv())), g);
+	}
+
 }

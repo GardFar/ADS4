@@ -17,29 +17,37 @@
  */
 
 
-package vue;
+package expressions;
+
+import vue.ValueEnvironment;
 
 /**
- * Expression correspondant  a l'identifiant d'une variable.
+ * Expression du type division
  * @author Q & A
  *
  */
-public class Var extends Expression{
+public class Div extends Expression{
 	
-	String name;
+	Expression e1;
+	Expression e2;
 	
 	/**
-	 * Cree une Var de nom st
-	 * @param st
+	 * Cree l'instruction e1/e2
+	 * @param e1
+	 * @param e2
 	 */
-	public Var(String st){
-		name=st;
+	public Div(Expression e1, Expression e2){
+		this.e1=e1;
+		this.e2=e2;
 	}
 	
 	@Override
 	public int eval(ValueEnvironment env) throws Exception{
-		return env.getValue(name);
+		int m = e2.eval(env);
+		if(m == 0){
+			throw new ArithmeticException("Erreur : Division par 0");
+		}
+		return e1.eval(env)/m;
 	}
 	
 }
-

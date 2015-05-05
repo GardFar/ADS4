@@ -17,22 +17,45 @@
  */
 
 
-package vue;
+package instructions;
+
+import java.awt.Graphics;
+
+import vue.Canvas;
+import expressions.Expression;
 
 /**
- * Une classe abstraite correspondant a une Expression
- * @author orpheus
+ * Instruction du type Si.. alors...Sinon
+ * @author Q & A
  *
  */
-public abstract class Expression {
+public class SiInstruction extends Instruction {
+
+	private Expression expr;
+	private Instruction instSI;
+	private Instruction instSINON;
 	
 	/**
-	 * Evaluer l'expression et renvoyer sa valeur entiere
-	 * @param env
-	 * @return
-	 * @throws Exception
+	 * Cree l'instruction Si e alors faire i1 sinon faire i2
+	 * @param e
+	 * @param i1
+	 * @param i2
 	 */
-	public abstract int eval(ValueEnvironment env) throws Exception;
+	public SiInstruction(Expression e,Instruction i1,Instruction i2){
+		this.expr=e;
+		this.instSI=i1;
+		this.instSINON=i2;
+	}
 	
-	
+	@Override
+	public void exec(Canvas canvas, Graphics g) throws Exception {
+		if(expr.eval(canvas.getEnv())!=0){
+			instSI.exec(canvas,g);		
+		}
+		else if(instSINON!=null){
+			instSINON.exec(canvas, g);
+		}
+		
+	}
+
 }

@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vue.Canvas;
-import vue.Instruction;
+import instructions.Instruction;
 
 /**
  * Objet representant un programme, c'est a dire une suite d'instructions. Il suffit alors d'utiliser sa methode exec pour le lancer

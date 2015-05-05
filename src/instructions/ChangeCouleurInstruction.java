@@ -17,35 +17,41 @@
  */
 
 
-package vue;
+package instructions;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.util.HashMap;
+
+import vue.Canvas;
+import expressions.Expression;
 
 /**
- * Instruction du type Tant Que
+ * Instruction qui change la couleur du pinceau de dessin.
  * @author Q & A
  *
  */
-public class TantQueInstruction extends Instruction {
+public class ChangeCouleurInstruction extends Instruction{
 
-	private Expression expr;
-	private Instruction inst;
+	private Expression couleur;
 	
 	/**
-	 * Construit l'instruction tant que e faire i
+	 * Cree un objet qui change la couleur du pinceau avec l'expression en parametre
 	 * @param e
-	 * @param i
 	 */
-	public TantQueInstruction(Expression e,Instruction i){
-		this.expr=e;
-		this.inst=i;
+	public ChangeCouleurInstruction(Expression e){
+		super();
+		couleur=e;
 	}
 	
 	@Override
-	public void exec(Canvas canvas, Graphics g) throws Exception {
-		while(expr.eval(canvas.getEnv())!=0){
-			inst.exec(canvas, g);
-		}
+	public String toString(){
+		return "Changer couleur "+couleur;
+	}
+	
+	@Override
+	public void exec(Canvas canvas, Graphics g) throws Exception{
+		g.setColor(new Color(couleur.eval(canvas.getEnv())));
 		
 	}
 

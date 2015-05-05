@@ -17,9 +17,12 @@
  */
 
 
-package vue;
+package instructions;
 
 import java.awt.Graphics;
+
+import vue.Canvas;
+import vue.Tortue;
 
 /**
  * Instruction du type baisser pinceau

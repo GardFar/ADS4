@@ -24,27 +24,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import vue.AvancerInstruction;
-import vue.BaisserPinceauInstruction;
-import vue.BlocInstruction;
+import instructions.AvancerInstruction;
+import instructions.BaisserPinceauInstruction;
+import instructions.BlocInstruction;
 import vue.Canvas;
-import vue.ChangeCouleurInstruction;
-import vue.ChangeEpaisseurInstruction;
-import vue.ChangeFondInstruction;
+import instructions.ChangeCouleurInstruction;
+import instructions.ChangeEpaisseurInstruction;
+import instructions.ChangeFondInstruction;
 import vue.Couleur;
-import vue.DefinitionInstruction;
-import vue.Div;
-import vue.Expression;
-import vue.HausserPinceauInstruction;
-import vue.Instruction;
-import vue.Int;
-import vue.Minus;
-import vue.Mult;
-import vue.Plus;
-import vue.SiInstruction;
-import vue.TantQueInstruction;
-import vue.TournerInstruction;
-import vue.Var;
+import instructions.DefinitionInstruction;
+import expressions.Div;
+import expressions.Expression;
+import instructions.HausserPinceauInstruction;
+import instructions.Instruction;
+import expressions.Int;
+import expressions.Minus;
+import expressions.Mult;
+import expressions.Plus;
+import instructions.SiInstruction;
+import instructions.TantQueInstruction;
+import instructions.TournerInstruction;
+import expressions.Var;
 
 /**
  * Parser Correspondant a la grammaire donnee en enonce. Si tout se passe bien, il genere un Programme

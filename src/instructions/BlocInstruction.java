@@ -17,31 +17,36 @@
  */
 
 
-package vue;
+package instructions;
+
+import java.awt.Graphics;
+import java.util.List;
+
+import vue.Canvas;
 
 /**
- * Expression du type multiplication
+ * Bloc d'instruction, ce qui est en soi une instruction
  * @author Q & A
  *
  */
-public class Mult extends Expression {
+public class BlocInstruction extends Instruction {
 
-	Expression e1;
-	Expression e2;
-
+	private List<Instruction> bloc;
+	
 	/**
-	 * Cree l'expression e1*e2
-	 * @param e1
-	 * @param e2
+	 * Cree un bloc d'instruction a partir d'une liste d'instructions
+	 * @param l
 	 */
-	public Mult(Expression e1, Expression e2) {
-		this.e1 = e1;
-		this.e2 = e2;
+	public BlocInstruction(List<Instruction> l){
+		bloc=l;
 	}
-
+	
 	@Override
-	public int eval(ValueEnvironment env) throws Exception {
-		return e1.eval(env) * e2.eval(env);
+	public void exec(Canvas canvas, Graphics g) throws Exception {
+		for(Instruction i:bloc){
+			i.exec(canvas, g);
+		}
+		
 	}
 
 }

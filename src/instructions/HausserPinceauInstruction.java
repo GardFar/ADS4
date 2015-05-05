@@ -17,33 +17,30 @@
  */
 
 
+package instructions;
 
-package vue;
+import java.awt.Graphics;
 
-
+import vue.Canvas;
+import vue.Tortue;
 /**
- * Expression du type Addition
+ * Instruction permettant de hausser le pinceau
  * @author Q & A
  *
  */
-public class Plus extends Expression{
-	
-	Expression e1;
-	Expression e2;
-	
+public class HausserPinceauInstruction extends Instruction{
+
 	/**
-	 * Cree l'expression e1+e2
-	 * @param e1
-	 * @param e2
+	 * Construit une instruction hausse le pinceau
 	 */
-	public Plus(Expression e1, Expression e2){
-		this.e1=e1;
-		this.e2=e2;
+	public HausserPinceauInstruction(){
+		super();
 	}
 	
 	@Override
-	public int eval(ValueEnvironment env) throws Exception{
-		return e1.eval(env)+e2.eval(env);
+	public void exec(Canvas canvas, Graphics g) {
+		Tortue t = canvas.getTortue();
+		t.setHaut(true);
 	}
-	
+
 }

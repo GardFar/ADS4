@@ -26,7 +26,7 @@ import java.util.HashMap;
  * @author Q & A
  *
  */
-class ValueEnvironment extends HashMap<String, Integer> {
+public class ValueEnvironment extends HashMap<String, Integer> {
 	
 	/**
 	 * 

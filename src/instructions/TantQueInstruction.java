@@ -17,51 +17,39 @@
  */
 
 
-package vue;
+package instructions;
 
 import java.awt.Graphics;
 
+import vue.Canvas;
+import expressions.Expression;
+
 /**
- * Instruction du type Avancer (ie Avancer + expression)
+ * Instruction du type Tant Que
  * @author Q & A
  *
  */
-public class AvancerInstruction extends Instruction{
+public class TantQueInstruction extends Instruction {
 
-	Expression distance;
+	private Expression expr;
+	private Instruction inst;
 	
 	/**
-	 * Cree une AvancerInstruction a partir de son expression
-	 * @param d
+	 * Construit l'instruction tant que e faire i
+	 * @param e
+	 * @param i
 	 */
-	public AvancerInstruction(Expression d){
-		distance=d;
-	}
-	
-	/**
-	 * Cree une AvancerInstruction a partir de la distance entiere parcourue
-	 * @param d
-	 */
-	public AvancerInstruction(int d){
-		distance = new Int(d);
-	}
-	
-	@Override
-	public String toString(){
-		return "Avancer de "+distance;
+	public TantQueInstruction(Expression e,Instruction i){
+		this.expr=e;
+		this.inst=i;
 	}
 	
 	@Override
 	public void exec(Canvas canvas, Graphics g) throws Exception {
-		Tortue t=canvas.getTortue();
-		int x0=t.getX();
-		int y0=canvas.getDimY()-t.getY();
-		t.avancer(distance.eval(canvas.getEnv()));
-		if(t.getX()<0 || t.getY()<0 || t.getX()>canvas.getDimX() || t.getY()>canvas.getDimY()){
-			throw new Exception("Tortue sortie du cadre");
+		while(expr.eval(canvas.getEnv())!=0){
+			inst.exec(canvas, g);
 		}
-		if(!t.isHaut())
-			g.drawLine(x0, y0, t.getX(), canvas.getDimY()-t.getY());
+		
 	}
 
 }

@@ -19,10 +19,11 @@
 package compilateur;
 
 
+import instructions.Instruction;
+
 import java.io.Reader;
 import java.util.List;
 
-import vue.Instruction;
 import lexer.Lexer;
 import lexer.LookAheadReader;
 import lexer.Parser;

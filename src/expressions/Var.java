@@ -17,40 +17,31 @@
  */
 
 
-package vue;
+package expressions;
 
-import java.awt.Graphics;
+import vue.ValueEnvironment;
 
 /**
- * Instruction correspondant a la declaration ou a l'affectation d'une variable
+ * Expression correspondant  a l'identifiant d'une variable.
  * @author Q & A
  *
  */
-public class DefinitionInstruction extends Instruction {
-
+public class Var extends Expression{
+	
 	String name;
-	Expression value;
 	
 	/**
-	 * Construit une DefinitionInstruction a partir du nom de la variable et de l'expression a laquelle on l'affecte
-	 * @param name
-	 * @param value
+	 * Cree une Var de nom st
+	 * @param st
 	 */
-	public DefinitionInstruction(String name,Expression value){
-		this.name=name;
-		this.value=value;
+	public Var(String st){
+		name=st;
 	}
 	
 	@Override
-	public void exec(Canvas canvas, Graphics g) throws Exception{
-		if(value!=null){
-			canvas.getEnv().setVar(name, value.eval(canvas.getEnv()));
-		}
-		else{
-			//J'ai ajoute cela dans le cas ou on ne fait que declarer une variable
-			canvas.getEnv().setVar(name, 0);
-		}
-		
+	public int eval(ValueEnvironment env) throws Exception{
+		return env.getValue(name);
 	}
-
+	
 }
+

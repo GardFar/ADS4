@@ -17,27 +17,33 @@
  */
 
 
-package vue;
+package expressions;
 
-import java.awt.Graphics;
+import vue.ValueEnvironment;
+
 /**
- * Instruction permettant de hausser le pinceau
+ * Expression du type multiplication
  * @author Q & A
  *
  */
-public class HausserPinceauInstruction extends Instruction{
+public class Mult extends Expression {
+
+	Expression e1;
+	Expression e2;
 
 	/**
-	 * Construit une instruction hausse le pinceau
+	 * Cree l'expression e1*e2
+	 * @param e1
+	 * @param e2
 	 */
-	public HausserPinceauInstruction(){
-		super();
+	public Mult(Expression e1, Expression e2) {
+		this.e1 = e1;
+		this.e2 = e2;
 	}
-	
+
 	@Override
-	public void exec(Canvas canvas, Graphics g) {
-		Tortue t = canvas.getTortue();
-		t.setHaut(true);
+	public int eval(ValueEnvironment env) throws Exception {
+		return e1.eval(env) * e2.eval(env);
 	}
 
 }
