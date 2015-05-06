@@ -42,5 +42,11 @@ public class HausserPinceauInstruction extends Instruction{
 		Tortue t = canvas.getTortue();
 		t.setHaut(true);
 	}
+	
+	@Override
+	public void exec(Canvas canvas) {
+		Tortue t = canvas.getTortue();
+		t.setHaut(true);
+	}
 
 }

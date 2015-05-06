@@ -52,7 +52,11 @@ public class ChangeCouleurInstruction extends Instruction{
 	@Override
 	public void exec(Canvas canvas, Graphics g) throws Exception{
 		g.setColor(new Color(couleur.eval(canvas.getEnv())));
-		
+	}
+	
+	@Override
+	public void exec(Canvas canvas) throws Exception{
+		canvas.setCouleurPinceau(new Color(couleur.eval(canvas.getEnv())));
 	}
 
 }

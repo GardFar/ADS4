@@ -48,5 +48,13 @@ public class BlocInstruction extends Instruction {
 		}
 		
 	}
+	
+	@Override
+	public void exec(Canvas canvas) throws Exception {
+		for(Instruction i:bloc){
+			i.exec(canvas);
+		}
+		
+	}
 
 }

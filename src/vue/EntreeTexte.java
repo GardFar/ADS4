@@ -116,6 +116,7 @@ public class EntreeTexte extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				pere.getCanvas().executer();
 				pere.getCanvas().repaint();
 			}
 			

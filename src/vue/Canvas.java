@@ -56,6 +56,11 @@ public class Canvas extends JPanel implements ActionListener{
 	
 	private Timer timer;
 	
+	private Color couleurPinceau=Color.BLACK;
+	private float epaisseurPinceau=1.0f;
+	private Color couleurFond=Color.green;
+	
+	
 	BufferedImage spriteTurtle;
 	private Programme programme;
 	
@@ -67,6 +72,25 @@ public class Canvas extends JPanel implements ActionListener{
 	private LinkedList<Dessin> dessins=new LinkedList<Dessin>();
 	
 	private int avanceeDessin=0;
+	
+	public Color getCouleurPinceau() {
+		return couleurPinceau;
+	}
+	public void setCouleurPinceau(Color couleurPinceau) {
+		this.couleurPinceau = couleurPinceau;
+	}
+	public float getEpaisseurPinceau() {
+		return epaisseurPinceau;
+	}
+	public void setEpaisseurPinceau(float epaisseurPinceau) {
+		this.epaisseurPinceau = epaisseurPinceau;
+	}
+	public Color getCouleurFond() {
+		return couleurFond;
+	}
+	public void setCouleurFond(Color couleurFond) {
+		this.couleurFond = couleurFond;
+	}
 	
 	/**
 	 * Cree un canvas des dimensions donnes en parametre dont le parent est la fentre en parametre
@@ -86,7 +110,7 @@ public class Canvas extends JPanel implements ActionListener{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		timer = new Timer(1000,this);
+		timer = new Timer(100,this);
 	}
 	/**
 	 * Set la liste d'instructions du Canvas
@@ -99,25 +123,12 @@ public class Canvas extends JPanel implements ActionListener{
 	
 	@Override
 	public void paintComponent(Graphics g){
-		System.out.println("Paint component");
 		if(!animation){
-			tortue.reIni();
-			if(pere.getErreurs()!=null){
-			pere.getErreurs().effacerContenu();
-			}
-			g.setColor(Color.GREEN);
+			g.setColor(this.getCouleurFond());
 			g.fillRect(0, 0, dimX, dimY);
-			
-			g.setColor(Color.RED);
-			if(programme!=null){
-				try{
-					programme.executer(this, g);
-				}
-				catch(Exception e){
-					pere.getErreurs().ecrireException(e.getMessage());
-				}
+			for(Dessin d : dessins){
+				d.dessiner(g, tortue);
 			}
-			
 			g.drawImage(spriteTurtle, tortue.getX()-10, this.getDimY()-tortue.getY()-10, 20, 20, null, null);
 		}
 		else{
@@ -128,10 +139,10 @@ public class Canvas extends JPanel implements ActionListener{
 	
 	
 	public void paintComponent2(Graphics g){
-		g.setColor(Color.GREEN);
+		g.setColor(this.getCouleurFond());
 		g.fillRect(0, 0, dimX, dimY);
 		
-		g.setColor(Color.RED);
+		g.setColor(this.getCouleurPinceau());
 		
 		for (int i=0; i<avanceeDessin; i++){
 			dessins.get(i).dessiner(g, tortue);
@@ -153,8 +164,6 @@ public class Canvas extends JPanel implements ActionListener{
 	 */
 	public void remplirFond(Color couleur, Graphics g){
 		Color tmp=g.getColor();
-		//Graphics2D g2d=(Graphics2D) g;
-		//g2d.setBackground(couleur);
 		g.setColor(couleur);
 		g.fillRect(0, 0, dimX, dimY);
 		g.setColor(tmp);
@@ -203,16 +212,34 @@ public class Canvas extends JPanel implements ActionListener{
 	public void ajouterDessin(Dessin d){
 		dessins.add(d);
 	}
+	
+	public void executer(){
+		tortue.reIni();
+		animation=false;
+		if(pere.getErreurs()!=null){
+			pere.getErreurs().effacerContenu();
+		}
+		
+		if(programme!=null){
+			try{
+				programme.executer(this);
+			}
+			catch(Exception e){
+				pere.getErreurs().ecrireException(e.getMessage());
+			}
+		}
+	}
+	
 	public void animation() {
-		System.out.println("Animation");
+		this.executer();
 		animation=true;
 		avanceeDessin=0;
 		timer.start();
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if(dessins!=null && !dessins.isEmpty()){
-			System.out.println("Bonjour");
 			if(!dessins.get(avanceeDessin).estFini()){
 				dessins.get(avanceeDessin).avancer();
 			}

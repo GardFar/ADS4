@@ -79,5 +79,21 @@ public class AvancerInstruction extends Instruction{
 			canvas.ajouterDessin(new Segment(x0, y0, t.getX(), canvas.getDimY()-t.getY(), g.getColor(), lWidth));
 		}
 	}
+	
+	@Override
+	public void exec(Canvas canvas) throws Exception{
+		Tortue t=canvas.getTortue();
+		int x0=t.getX();
+		int y0=canvas.getDimY()-t.getY();
+		t.avancer(distance.eval(canvas.getEnv()));
+		if(t.getX()<0 || t.getY()<0 || t.getX()>canvas.getDimX() || t.getY()>canvas.getDimY()){
+			throw new Exception("Tortue sortie du cadre");
+		}
+		if(!t.isHaut()){
+			//Ajout du dessin
+			float lWidth=canvas.getEpaisseurPinceau();
+			canvas.ajouterDessin(new Segment(x0, y0, t.getX(), canvas.getDimY()-t.getY(), canvas.getCouleurPinceau(), lWidth));
+		}
+	}
 
 }

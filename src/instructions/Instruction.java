@@ -41,4 +41,5 @@ public abstract class Instruction {
 	 * @throws Exception
 	 */
 	public abstract void exec(Canvas canvas, Graphics g) throws Exception;
+	public abstract void exec(Canvas canvas) throws Exception;
 }

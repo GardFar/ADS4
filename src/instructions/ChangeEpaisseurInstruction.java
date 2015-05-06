@@ -63,5 +63,10 @@ public class ChangeEpaisseurInstruction extends Instruction{
 		Graphics2D g2D=(Graphics2D)g;
 		g2D.setStroke(new BasicStroke((float) epaisseur.eval(canvas.getEnv())));
 	}
+	
+	@Override
+	public void exec(Canvas canvas) throws Exception {
+		canvas.setEpaisseurPinceau((float) epaisseur.eval(canvas.getEnv()));
+	}
 
 }

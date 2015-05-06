@@ -51,5 +51,13 @@ public class TantQueInstruction extends Instruction {
 		}
 		
 	}
+	
+	@Override
+	public void exec(Canvas canvas) throws Exception {
+		while(expr.eval(canvas.getEnv())!=0){
+			inst.exec(canvas);
+		}
+		
+	}
 
 }

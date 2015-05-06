@@ -52,7 +52,11 @@ private Expression couleur;
 	
 	@Override
 	public void exec(Canvas canvas, Graphics g) throws Exception{
-			canvas.remplirFond(new Color(couleur.eval(canvas.getEnv())), g);
+		canvas.remplirFond(new Color(couleur.eval(canvas.getEnv())), g);
+	}
+	
+	public void exec(Canvas canvas) throws Exception{
+		canvas.setCouleurPinceau(new Color(couleur.eval(canvas.getEnv())));
 	}
 
 }

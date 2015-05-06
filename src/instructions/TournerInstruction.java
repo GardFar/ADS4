@@ -56,5 +56,11 @@ public class TournerInstruction extends Instruction{
 		Tortue t=canvas.getTortue();
 		t.tourner(angle.eval(canvas.getEnv()));
 	}
+	
+	@Override
+	public void exec(Canvas canvas) throws Exception {
+		Tortue t=canvas.getTortue();
+		t.tourner(angle.eval(canvas.getEnv()));
+	}
 
 }

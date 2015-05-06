@@ -57,5 +57,16 @@ public class SiInstruction extends Instruction {
 		}
 		
 	}
+	
+	@Override
+	public void exec(Canvas canvas) throws Exception {
+		if(expr.eval(canvas.getEnv())!=0){
+			instSI.exec(canvas);		
+		}
+		else if(instSINON!=null){
+			instSINON.exec(canvas);
+		}
+		
+	}
 
 }

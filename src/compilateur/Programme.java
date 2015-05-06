@@ -53,10 +53,20 @@ public class Programme {
 	public void executer(Canvas c, Graphics g) throws Exception{
 		
 		for (Instruction i : instructions){
-			//System.out.println(i.toString());
 			i.exec(c, g);
 		}
 		
-		//bob.run();
+	}
+	
+	/**
+	 * Executer le programme pour le canvas fourni en argument
+	 * @param c Le Canvas dans le quel on dessine
+	 * @throws Exception
+	 */
+	public void executer(Canvas c) throws Exception{
+		
+		for (Instruction i : instructions){
+			i.exec(c);
+		}
 	}
 }
