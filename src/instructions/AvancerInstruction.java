@@ -19,8 +19,12 @@
 
 package instructions;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
+import dessins.Segment;
 import vue.Canvas;
 import expressions.Expression;
 import expressions.Int;
@@ -60,6 +64,7 @@ public class AvancerInstruction extends Instruction{
 	
 	@Override
 	public void exec(Canvas canvas, Graphics g) throws Exception {
+		Graphics2D g2d=(Graphics2D)g;
 		Tortue t=canvas.getTortue();
 		int x0=t.getX();
 		int y0=canvas.getDimY()-t.getY();
@@ -67,8 +72,12 @@ public class AvancerInstruction extends Instruction{
 		if(t.getX()<0 || t.getY()<0 || t.getX()>canvas.getDimX() || t.getY()>canvas.getDimY()){
 			throw new Exception("Tortue sortie du cadre");
 		}
-		if(!t.isHaut())
+		if(!t.isHaut()){
 			g.drawLine(x0, y0, t.getX(), canvas.getDimY()-t.getY());
+			//Ajout du dessin
+			float lWidth=((BasicStroke)(g2d.getStroke())).getLineWidth();
+			canvas.ajouterDessin(new Segment(x0, y0, t.getX(), canvas.getDimY()-t.getY(), g.getColor(), lWidth));
+		}
 	}
 
 }

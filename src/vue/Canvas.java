@@ -24,22 +24,27 @@ import instructions.Instruction;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import compilateur.Programme;
+import dessins.Dessin;
 
 /**
  * Panel sur lequel le code entre par l'utilisateur pourra dessiner.
  * @author orpheus
  *
  */
-public class Canvas extends JPanel{
+public class Canvas extends JPanel implements ActionListener{
 	/**
 	 * 
 	 */
@@ -49,10 +54,19 @@ public class Canvas extends JPanel{
 	private Fenetre pere;
 	protected Tortue tortue;
 	
+	private Timer timer;
+	
 	BufferedImage spriteTurtle;
 	private Programme programme;
 	
+	private boolean animation=false;
+	
 	private ValueEnvironment env=new ValueEnvironment(); //A bouger plus tard, la ou les appelles de exec seront fait
+	
+	
+	private LinkedList<Dessin> dessins=new LinkedList<Dessin>();
+	
+	private int avanceeDessin=0;
 	
 	/**
 	 * Cree un canvas des dimensions donnes en parametre dont le parent est la fentre en parametre
@@ -72,6 +86,7 @@ public class Canvas extends JPanel{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		timer = new Timer(1000,this);
 	}
 	/**
 	 * Set la liste d'instructions du Canvas
@@ -84,29 +99,47 @@ public class Canvas extends JPanel{
 	
 	@Override
 	public void paintComponent(Graphics g){
-		tortue.reIni();
-		if(pere.getErreurs()!=null){
+		System.out.println("Paint component");
+		if(!animation){
+			tortue.reIni();
+			if(pere.getErreurs()!=null){
 			pere.getErreurs().effacerContenu();
+			}
+			g.setColor(Color.GREEN);
+			g.fillRect(0, 0, dimX, dimY);
+			
+			g.setColor(Color.RED);
+			if(programme!=null){
+				try{
+					programme.executer(this, g);
+				}
+				catch(Exception e){
+					pere.getErreurs().ecrireException(e.getMessage());
+				}
+			}
+			
+			g.drawImage(spriteTurtle, tortue.getX()-10, this.getDimY()-tortue.getY()-10, 20, 20, null, null);
 		}
-		//Graphics2D g2d=(Graphics2D) g;
-		//g2d.setBackground(Color.GREEN);
+		else{
+			paintComponent2(g);
+		}
+		
+	}
+	
+	
+	public void paintComponent2(Graphics g){
 		g.setColor(Color.GREEN);
 		g.fillRect(0, 0, dimX, dimY);
 		
 		g.setColor(Color.RED);
-		if(programme!=null){
-			try{
-				//Dessinateur d=new Dessinateur(programme, this, g);
-				//d.run();
-				programme.executer(this, g);
-			}
-			catch(Exception e){
-				pere.getErreurs().ecrireException(e.getMessage());
-			}
+		
+		for (int i=0; i<avanceeDessin; i++){
+			dessins.get(i).dessiner(g, tortue);
 		}
-		
-		g.drawImage(spriteTurtle, tortue.getX()-10, this.getDimY()-tortue.getY()-10, 20, 20, null, null);
-		
+		if(avanceeDessin!=0){
+			Dessin last=dessins.get(avanceeDessin-1);
+			last.dessinTortue(g,this, spriteTurtle);
+		}
 	}
 	
 	public void recevoirException(Exception e){
@@ -165,5 +198,32 @@ public class Canvas extends JPanel{
 	 */
 	public ValueEnvironment getEnv(){
 		return env;
+	}
+	
+	public void ajouterDessin(Dessin d){
+		dessins.add(d);
+	}
+	public void animation() {
+		System.out.println("Animation");
+		animation=true;
+		avanceeDessin=0;
+		timer.start();
+	}
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		if(dessins!=null && !dessins.isEmpty()){
+			System.out.println("Bonjour");
+			if(!dessins.get(avanceeDessin).estFini()){
+				dessins.get(avanceeDessin).avancer();
+			}
+			else{
+				avanceeDessin++;
+			}
+			if(avanceeDessin==dessins.size()){
+				timer.stop();
+				animation=false;
+			}
+		}
+		repaint();
 	}
 }

@@ -56,6 +56,15 @@ public class Menu extends JMenuBar{
 		
 		JMenuItem charger = new JMenuItem("Charger");
 		JMenuItem sauvegarder = new JMenuItem("Sauvegarder");
+		JMenuItem animer = new JMenuItem("Animer");
+		animer.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				pere.animation();
+			}
+			
+		});
 		sauvegarder.addActionListener(new ActionListener(){
 
 			@Override
@@ -73,5 +82,6 @@ public class Menu extends JMenuBar{
 		});
 		fichier.add(sauvegarder);
 		fichier.add(charger);
+		fichier.add(animer);
 	}
 }

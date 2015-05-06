@@ -134,4 +134,8 @@ public class Fenetre extends JFrame{
 			}
 		}
 	}
+
+	public void animation() {
+		canvas.animation();
+	}
 }
