@@ -97,6 +97,7 @@ public class Parser {
 	public void nonTermProgramme() throws Exception {
 		instructions.addAll(nontermDeclarations());
 		instructions.add(nontermInstruction());
+		term(Sym.EOF);
 	}
 
 	/**

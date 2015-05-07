@@ -216,6 +216,7 @@ public class Canvas extends JPanel implements ActionListener{
 	public void executer(){
 		tortue.reIni();
 		animation=false;
+		this.dessins=new LinkedList<Dessin>();
 		if(pere.getErreurs()!=null){
 			pere.getErreurs().effacerContenu();
 		}
@@ -231,6 +232,7 @@ public class Canvas extends JPanel implements ActionListener{
 	}
 	
 	public void animation() {
+		this.dessins=new LinkedList<Dessin>();
 		this.executer();
 		animation=true;
 		avanceeDessin=0;

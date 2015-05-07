@@ -50,3 +50,34 @@ Debut
 Fin 
 
 Fin
+
+
+//////////////
+//Dessiner Batman
+
+Var angle;
+
+Debut
+
+angle =0;
+
+Tourne 0-45;
+HautPinceau;
+ChangeCouleur noir;
+Avance 100;
+BasPinceau;
+Tourne 45;
+Avance 400;
+
+Tourne 0-150;
+Avance 150;
+
+Tourne 150-90;
+Avance 100;
+
+Tourne 60;
+Avance 150;
+
+Fin
+
+

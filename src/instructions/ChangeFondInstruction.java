@@ -56,7 +56,7 @@ private Expression couleur;
 	}
 	
 	public void exec(Canvas canvas) throws Exception{
-		canvas.setCouleurPinceau(new Color(couleur.eval(canvas.getEnv())));
+		canvas.setCouleurFond(new Color(couleur.eval(canvas.getEnv())));
 	}
 
 }
