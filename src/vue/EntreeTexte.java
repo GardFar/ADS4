@@ -61,6 +61,8 @@ public class EntreeTexte extends JPanel{
 	private JButton compiler;
 	private JButton executer;
 	
+	private JPanel boutons =new JPanel();
+	
 	/**
 	 * Cree une EntreeTexte standard
 	 * @param p
@@ -88,11 +90,16 @@ public class EntreeTexte extends JPanel{
 			Image executerImage=ImageIO.read(getClass().getClassLoader().getResource("Images/executer.png"));
 			compiler.setIcon(new ImageIcon(compilationImage));
 			executer.setIcon(new ImageIcon(executerImage));
+			pere.pack();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		add(compiler, BorderLayout.LINE_END);
-		add(executer, BorderLayout.CENTER);
+		
+		boutons.setLayout(new BorderLayout());
+		boutons.add(compiler, BorderLayout.LINE_END);
+		boutons.add(executer, BorderLayout.CENTER);
+		
+		add(boutons);
 		
 		compiler.addActionListener(new ActionListener(){
 
@@ -108,6 +115,10 @@ public class EntreeTexte extends JPanel{
 				} catch (Exception e) {
 					pere.getErreurs().ecrireException(e.getMessage());
 				}
+				finally{
+					boutons.repaint();
+					repaint();
+				}
 			}
 			
 		});
@@ -118,6 +129,8 @@ public class EntreeTexte extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				pere.getCanvas().executer();
 				pere.getCanvas().repaint();
+				boutons.repaint();
+				repaint();
 			}
 			
 		});

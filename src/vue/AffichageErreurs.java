@@ -3,7 +3,6 @@ package vue;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -32,7 +31,7 @@ public class AffichageErreurs extends JPanel{
 	public AffichageErreurs(Fenetre p){
 		this.pere=p;
 		this.setLayout(new BorderLayout());
-		this.setPreferredSize(new Dimension(400, 200));
+		this.setPreferredSize(new Dimension(50, 200));
 		this.setBorder(BorderFactory.createRaisedBevelBorder());
 		initComponents();
 	}
@@ -40,7 +39,7 @@ public class AffichageErreurs extends JPanel{
 	private void initComponents(){
 		area=new JTextArea();
 		this.add(area, BorderLayout.PAGE_START);
-		area.setPreferredSize(new Dimension(400, 500));
+		area.setPreferredSize(new Dimension(50, 500));
 		area.setEditable(false);
 		area.setForeground(Color.red);
 	}
@@ -58,5 +57,8 @@ public class AffichageErreurs extends JPanel{
 	 */
 	public void ecrireException(String s){
 		area.append(s+"\n");
+		pere.repaint();
+		pere.pack();
+		
 	}
 }
