@@ -75,10 +75,11 @@ public class EntreeTexte extends JPanel{
 	}
 	
 	private void initComponents(){
+		this.removeAll();
 		this.setBorder(BorderFactory.createRaisedBevelBorder());
 		
 		pane=new JTextPane();
-		scroll = new JScrollPane(pane, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scroll = new JScrollPane(pane, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		
 		this.add(scroll, BorderLayout.PAGE_START);
 		pane.setPreferredSize(new Dimension(400, 500));
@@ -99,7 +100,7 @@ public class EntreeTexte extends JPanel{
 		boutons.add(compiler, BorderLayout.LINE_END);
 		boutons.add(executer, BorderLayout.CENTER);
 		
-		add(boutons);
+		add(boutons, BorderLayout.CENTER);
 		
 		compiler.addActionListener(new ActionListener(){
 
@@ -116,8 +117,10 @@ public class EntreeTexte extends JPanel{
 					pere.getErreurs().ecrireException(e.getMessage());
 				}
 				finally{
+					checkBoutons();
+					compiler.setVisible(true);
 					boutons.repaint();
-					repaint();
+					compiler.repaint();
 				}
 			}
 			
@@ -129,8 +132,11 @@ public class EntreeTexte extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				pere.getCanvas().executer();
 				pere.getCanvas().repaint();
+				
+				checkBoutons();
+				executer.setVisible(true);
 				boutons.repaint();
-				repaint();
+				executer.repaint();
 			}
 			
 		});
@@ -166,5 +172,16 @@ public class EntreeTexte extends JPanel{
 			e.printStackTrace();
 		}
 		
+	}
+
+	public void checkBoutons() {
+		System.out.println("Check");
+		String texte=pane.getText();
+		initComponents();
+		pane.replaceSelection(texte);
+		add(boutons, BorderLayout.CENTER);
+		boutons.setVisible(true);
+		compiler.setVisible(true);
+		executer.setVisible(true);
 	}
 }

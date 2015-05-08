@@ -57,6 +57,7 @@ public class AffichageErreurs extends JPanel{
 	 */
 	public void ecrireException(String s){
 		area.append(s+"\n");
+		pere.checkBoutons();
 		pere.repaint();
 		pere.pack();
 		
