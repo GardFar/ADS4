@@ -1,0 +1,25 @@
+Projet ADS4 : THOMINE Ambroise & PERRACHON Quentin
+
+nonTermProgramme-> nonTermDeclarations nonTermInstruction
+
+nonTermDeclarations-> VAR nonTermIdentificateur; nonTermDeclaration | rien
+
+nonTermInstruction-> Avance nonTermExpression | Tourne nonTermExpression | BasPinceau | HautPinceau |identificateur = nonTermExpression | ChangeCouleur nonTermIdentificateur| 
+Debut nonTermBlocInstruction Fin | Si nonTermExpression Alors nonTermInstruction nonTermSinon | Tant que nonTermExpression Faire nonTermInstruction |
+ChangeFond nonTermIdentificateur
+
+nonTermBlocInstruction -> nonTermInstruction ; nonTermBlocInstruction | rien
+
+nonTermExpression-> nombre nonTermExpressionSuite | identificateur nonTermExpressionSuite | (nonTermExpression) nonTermExpressionSuite
+
+nonTermExpressionSuite->nonTermOperateur nonTermExpressionSuite | rien
+
+nonTermOperateur->+ nonTermExpression | - nonTermExpression |* nonTermExpression |/ nonTermExpression|, nonTermExpression2, nonTermExpression2
+
+nonTermExpression2-> nombre nonTermExpressionSuite2 | identificateur nonTermExpressionSuite2 | (nonTermExpression2) nonTermExpressionSuite2
+
+nonTermExpressionSuite2->nonTermOperateur2 nonTermExpressionSuite2 | rien
+
+nonTermOperateur->+ nonTermExpression | - nonTermExpression |* nonTermExpression |/ nonTermExpression
+
+nonTermSinon->Sinon nonTermInstruction | rien

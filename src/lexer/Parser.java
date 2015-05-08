@@ -364,8 +364,6 @@ public class Parser {
 			term(Sym.DIV);
 			r= new Div(e,nontermExpression2());
 			return r;	
-		case COMMA:
-			return e;
 		default:
 			throw new Exception("Erreur : Operateur non reconnua ligne "+reader.getLigne()+", colonne "+reader.getColonne());
 		}

@@ -72,9 +72,9 @@ public class Couleur extends Expression{
 	
 	@Override
 	public int eval(ValueEnvironment env) throws Exception {
-		int r = rouge.eval(env);
-		int v = vert.eval(env);
-		int b = bleu.eval(env);
+		int r = rouge.eval(env)%256;
+		int v = vert.eval(env)%256;
+		int b = bleu.eval(env)%256;
 		return value(r, v, b);
 		
 	}
